@@ -12,9 +12,14 @@ public class WordScrambler extends Actor
      * Act - do whatever the WordScrambler wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public WordScrambler()
+    {
+        setImage(new GreenfootImage(scrambler("What"), 60, Color.RED, null)); 
+    }
+    
     public void act()
     {
-        setImage(new GreenfootImage(scrambler("What"), 60, Color.RED, null));  
+         
     }
     
     public static String scrambler(String word)

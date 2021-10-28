@@ -1,11 +1,13 @@
 #BlueJ class context
 comment0.target=WordScrambler
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ WordScrambler\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ WordScrambler\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
-comment1.target=void\ act()
-comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ WordScrambler\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-comment2.params=word
-comment2.target=java.lang.String\ scrambler(java.lang.String)
-comment3.params=shuffledWord\ position1\ position2
-comment3.target=java.lang.String\ swapCharacters(java.lang.String,\ int,\ int)
-numComments=4
+comment1.target=WordScrambler()
+comment1.text=\n\ Act\ -\ do\ whatever\ the\ WordScrambler\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=word
+comment3.target=java.lang.String\ scrambler(java.lang.String)
+comment4.params=shuffledWord\ position1\ position2
+comment4.target=java.lang.String\ swapCharacters(java.lang.String,\ int,\ int)
+numComments=5
