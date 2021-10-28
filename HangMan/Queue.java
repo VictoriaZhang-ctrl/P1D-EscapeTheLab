@@ -4,27 +4,79 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Queue  
+
+import java.util.Iterator;
+public class Queue<E> implements Iterable<E>
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private Node first;
+    private Node last;
 
-    /**
-     * Constructor for objects of class Queue
-     */
-    public Queue()
+    private class Node
     {
+        private E item;
+        private Node next;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
+    public boolean isEmpty()
     {
-        // put your code here
-        return x + y;
+        return first == null;
     }
+
+    public void enqueue(E item)
+    {
+        Node oldlast = last;
+
+        last = new Node();
+        last.item = item;
+        last.next = null;
+
+        if (isEmpty())
+        {
+            first = last;
+        }
+        else
+        {
+            oldlast.next = last;
+        }
+
+		
+    }
+
+    public E dequeue()
+    {
+        E item = first.item;
+        first = first.next;
+
+        if(isEmpty())
+        {
+            last = null;
+        }
+
+        return item;
+    }
+    
+    public Iterator<E> iterator() {
+        return new MyIterator();
+    }
+
+    class MyIterator implements Iterator<E> {
+
+        private Node n = first;
+        
+        public boolean hasNext() {
+            return n != null;
+        }
+
+        public E next() {
+            E item = n.item;
+            n = n.next;
+            return item;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
 }

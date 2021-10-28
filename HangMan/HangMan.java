@@ -14,6 +14,18 @@ public class HangMan extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        walk();
+    }
+    
+    public void walk()
+    {
+        if(Greenfoot.isKeyDown("right") == true)
+        {
+            move(1);
+        }
+        if(Greenfoot.isKeyDown("left") == true)
+        {
+            move(-1);
+        }
     }
 }
