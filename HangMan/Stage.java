@@ -10,7 +10,7 @@ import java.util.*;
 public class Stage extends World
 
 {
-    public int MAX_WordScramble = 5;
+    public int MAX_WordScramble = 10;
     
     public boolean gameStart = false;
     public boolean gameOver = false;
@@ -18,11 +18,13 @@ public class Stage extends World
     GreenfootImage background = new GreenfootImage("BackGround.png");
     
     //Map the unscrambled vs scrambled word (key: unscrambled, value: scrambled)
-    HashMap<String, ArrayList> dictionary = new HashMap<String, ArrayList>();
     
     HangMan man = new HangMan();
     
     Timer timer = new Timer();
+    
+    WordScrambler scrambler = new WordScrambler();
+    
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -36,13 +38,11 @@ public class Stage extends World
     public void act()
     {
         setBackground(background);
-        addObject(man, 75, 465);
-        addObject(timer, 600, 75);
-    }
-    
-    public void fillDictionary()
-    {
         
+        addObject(man, 75, 465);
+        
+        addObject(scrambler, 100, 100);
+
     }
     
     public void hangMan_Game(String word)
