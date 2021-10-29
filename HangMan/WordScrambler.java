@@ -1,3 +1,4 @@
+import java.util.Scanner; 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.concurrent.ThreadLocalRandom;
 /**
@@ -8,10 +9,16 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class WordScrambler extends Actor
 {
+    private urlreader = https://gist.githubusercontent.com/sirkets/7d89492826a0d245a086e8c5c56829a8/raw/307ef87315bf0360f682bf25821fdcf4fe71db8c/nouns.txt
+    
+    //This is for naming the scanner called "myScanner".
+    Scanner myScanner = new Scanner(System.in);
+    
     /**
      * Act - do whatever the WordScrambler wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
     public WordScrambler()
     {
         setImage(new GreenfootImage(scrambler("What"), 60, Color.RED, null)); 
@@ -46,4 +53,5 @@ public class WordScrambler extends Actor
         charArray[position2] = temp;
         return new String(charArray);
     }
+    myScanner.close();
 }
