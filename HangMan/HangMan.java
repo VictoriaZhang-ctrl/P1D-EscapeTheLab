@@ -6,8 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
+
 public class HangMan extends Actor
 {
+    
     /**
      * Act - do whatever the HangMan wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -15,6 +17,8 @@ public class HangMan extends Actor
     public void act()
     {
         walk();
+        Queue queue = new Queue(readLine()); 
+        
     }
     
     public void walk()

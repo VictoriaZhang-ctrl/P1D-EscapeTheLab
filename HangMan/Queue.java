@@ -6,11 +6,19 @@
  */
 
 import java.util.Iterator;
-public class Queue<E> implements Iterable<E>
+import java.util.Random;
+
+public class Queue<E> extends hangManGame implements Iterable<E>
 {
+
     // instance variables - replace the example below with your own
     private Node first;
     private Node last;
+    private Reader reader;
+    
+    //Random name : myRandom 
+    private static Random myRandom = new Random();
+    
 
     private class Node
     {
@@ -40,7 +48,7 @@ public class Queue<E> implements Iterable<E>
             oldlast.next = last;
         }
 
-		
+        
     }
 
     public E dequeue()

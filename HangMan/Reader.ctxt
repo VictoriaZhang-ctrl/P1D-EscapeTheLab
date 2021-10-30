@@ -1,5 +1,15 @@
 #BlueJ class context
 comment0.target=Reader
 comment1.params=list
-comment1.target=void\ readInto(java.util.ArrayList)
-numComments=2
+comment1.target=void\ readNouns(java.util.ArrayList)
+comment2.params=list
+comment2.target=void\ readVerbs(java.util.ArrayList)
+comment3.params=list
+comment3.target=void\ readAdjectives(java.util.ArrayList)
+comment4.params=list
+comment4.target=void\ readInto(java.util.ArrayList)
+comment5.params=list1
+comment5.target=void\ readInto1(java.util.ArrayList)
+comment6.params=list2
+comment6.target=void\ readInto2(java.util.ArrayList)
+numComments=7
