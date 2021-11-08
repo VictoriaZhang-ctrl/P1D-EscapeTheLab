@@ -1,4 +1,5 @@
 /**
+ -/**
  * Write a description of class Stack here.
  * 
  * @author (your name) 
@@ -35,12 +36,13 @@ public class Stack<E> implements Iterable<E>
         first.next = second;
     }
 
-    public Iterator<E> iterator() {
+    public Iterator<E> iterator()
+    {
         return new MyIterator();
     }
 
-    class MyIterator implements Iterator<E> {
-
+    class MyIterator implements Iterator<E>
+    {
         private Node n = first;
         
         public boolean hasNext() {
