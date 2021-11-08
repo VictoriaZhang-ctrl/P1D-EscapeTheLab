@@ -19,27 +19,36 @@ public class Stage extends World
     public static boolean spawn = true;
     //spawn only one ArrayList
     public static boolean spawnList = true;
+    
+    public boolean allowSpawnBird = true;
 
     public String correctAns = "";
     public String storeWord = "";
+    
+    //RoomNum Regulator Variables
+    public int roomNum = 0;
+    public int roomThreeProgress = 0;
 
     GreenfootImage background = new GreenfootImage("BackGround.png");
 
     //All Objects
     HangMan man = new HangMan();
+    
     UndoButton undo = new UndoButton(); 
+    
     SubmitButton submit = new SubmitButton();
+    
     InputBox inputBox = new InputBox();
+    
     WordScrambler wordScrambler = new WordScrambler();
     
-    JudgementBird bird = new JudgementBird();
+    Timer timer = new Timer();
 
     String stringToDisplay = "";
 
     //All Data Structures
     static HashMap<String, String> map = new HashMap<String, String>();
     static Stack<Character> stackOfLetters = new Stack<Character>();
-    static Queue<String> queueOfWords = new Queue<String>();
 
     //ListOfWords
     ArrayList<String> myList = new ArrayList<String>();
@@ -63,7 +72,6 @@ public class Stage extends World
         {
             fillListOfWords();
             fillHashMap();
-            fillQueue();
         }
         spawnList = false;
 
@@ -76,9 +84,10 @@ public class Stage extends World
         {
             //add Objects
             addObject(man, 100, 490);
-            //addObject(bird, 0, 420);
             addObject(new Paper(), 800, 490);
             addObject(new Paper(), 1100, 490);
+            addObject(timer, 0, 0);
+            timer.addTime();
 
             //reset modes & data structures
             man.walkMode();
@@ -99,26 +108,8 @@ public class Stage extends World
         removeObjects(getObjects(null));
     }
     
-    //All HangMan Game-Code Below
-    public void hangMan_Game()
-    {
-        String answer = queueOfWords.dequeue();
-        queueOfWords.enqueue(answer);
-        
-        String maskedWord = "";
-        for(int i = 0; i<answer.length(); i++)
-        {
-            maskedWord += "-";
-        }
-        
-        boolean complete = false;
-        
-        ArrayList<Character> guessedCorrect = new ArrayList<Character>();
-        ArrayList<Character> guessedIncorrect = new ArrayList<Character>();
-    }
-    
     //Utility
-    public void fillQueue()
+    /*public void fillQueue()
     {
         for(int i = 0; i<10; i++)
         {
@@ -128,7 +119,7 @@ public class Stage extends World
 
             queueOfWords.enqueue(str);
         }
-    }
+    }*/
 
     //All Word Scramble Game-Code Below
     public void scrambleWord_Game()

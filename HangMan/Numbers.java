@@ -44,8 +44,9 @@ public class Numbers extends Actor
             for(int i = 0; i<10; i++)
             {
                 num.enqueue(i);
+                image.enqueue(new GreenfootImage(Integer.toString(i) + ".png"));
             }
-            image.enqueue(zero);
+            /*image.enqueue(zero);
             image.enqueue(one);
             image.enqueue(two);
             image.enqueue(three);
@@ -54,7 +55,7 @@ public class Numbers extends Actor
             image.enqueue(six);
             image.enqueue(seven);
             image.enqueue(eight);
-            image.enqueue(nine);
+            image.enqueue(nine);*/
             
             queueFilled = true;
         }
