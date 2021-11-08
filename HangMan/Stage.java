@@ -14,6 +14,7 @@ public class Stage extends World
 
     public boolean gameStart = true;
     public boolean gameOver = false;
+    
     //spawn only once
     public static boolean spawn = true;
     //spawn only one ArrayList

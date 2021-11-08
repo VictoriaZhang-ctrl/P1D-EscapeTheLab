@@ -41,11 +41,22 @@ public class Letter extends Actor
                 World world = getWorld();
                 Stage stage = (Stage)world;
                 
+                reportLetter();
+                
                 stage.printStack();
                 stage.clearString();
                 world.removeObject(this);
             }
         }
+    }
+    
+    public void reportLetter()
+    {
+        World world = getWorld();
+        Stage stage = (Stage)world;
+        
+        Stack stack = stage.getStack();
+        stack.push(letter);
     }
 }
     

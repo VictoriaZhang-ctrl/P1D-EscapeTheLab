@@ -18,7 +18,7 @@ public class WordScrambler extends Actor
     {
         String shuffledWord = word; //original
         int wordSize = word.length();
-        int shuffleCount = 3; // number of times words are shuffled
+        int shuffleCount = 5; // number of times words are shuffled
         for(int i=0;i<shuffleCount;i++)
         {
             //swap letters in two indexes
