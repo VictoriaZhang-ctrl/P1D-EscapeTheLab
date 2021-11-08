@@ -17,7 +17,7 @@ public class HangMan extends Actor
     public void act()
     {
         walk();
-        Queue queue = new Queue(readLine()); 
+        //Queue queue = new Queue(readLine()); 
         
     }
     

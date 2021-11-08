@@ -8,7 +8,7 @@
 import java.util.Iterator;
 import java.util.Random;
 
-public class Queue<E> extends hangManGame implements Iterable<E>
+public class Queue<E> implements Iterable<E>
 {
 
     // instance variables - replace the example below with your own
