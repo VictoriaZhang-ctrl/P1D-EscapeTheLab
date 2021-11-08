@@ -20,15 +20,18 @@ public class Stage extends World
     //spawn only one ArrayList
     public static boolean spawnList = true;
 
+    public boolean roomOnePrep = false;
+    public boolean roomTwoPrep = false;
+    public boolean roomThreePrep = false;
+
     public boolean allowSpawnBird = true;
 
     public String correctAns = "";
     public String storeWord = "";
 
     //RoomNum Regulator Variables
-    public int roomNum = 0;
-    public int roomThreeProgress = 0;
-    
+    public static int roomNum = 0;
+
     //Passwords
     public static String passwordRoom1 = "8096";
     public static String passwordRoom2 = "7345";
@@ -85,6 +88,10 @@ public class Stage extends World
         {
             prepare_Room3();
         }
+        if(roomNum == 4)
+        {
+            win();
+        }
     }
 
     public void gameStart()
@@ -97,35 +104,87 @@ public class Stage extends World
 
     public void prepare_Room1()
     {
-        //add Objects
-        addObject(new Paper(), 800, 490);
-        addObject(new Door(), 1100, 410);
-        addObject(timer, 0, 0);
-        
-        addObject(man, 100, 490);
-        
-        timer.addTime();
+        if(!roomOnePrep)
+        {
+            //add Objects
+            removeObjects(getObjects(null));
 
-        //reset modes & data structures
-        man.walkMode();
-        clearStack();
+            roomNum = 1;
 
-        gameStart = true;
+            addObject(new Paper(), 800, 490);
+            addObject(new Door(), 1100, 410);
+            addObject(timer, 0, 0);
+
+            addObject(man, 100, 490);
+
+            timer.addTime();
+
+            //reset modes & data structures
+            man.walkMode();
+            clearStack();
+
+            gameStart = true;
+        }
     }
 
     public void prepare_Room2()
     {
+        if(!roomTwoPrep)
+        {
+            removeObjects(getObjects(null));
+            roomNum = 2;
+            
+            addObject(new Paper(), 1000, 490);
+            addObject(new Door(), 1100, 410);
+            addObject(timer, 0, 0);
 
+            addObject(man, 100, 490);
+
+            timer.addTime();
+
+            //reset modes & data structures
+            man.walkMode();
+            clearStack();
+            
+            roomTwoPrep = true;
+        }
     }
 
     public void prepare_Room3()
     {
+        if(!roomThreePrep)
+        {
+            removeObjects(getObjects(null));
+            roomNum = 3;
+            
+            addObject(new Paper(), 500, 490);
+            addObject(new Door(), 1100, 410);
+            addObject(timer, 0, 0);
 
+            addObject(man, 100, 490);
+
+            timer.addTime();
+
+            //reset modes & data structures
+            man.walkMode();
+            clearStack();
+            
+            roomThreePrep = true;
+        }
     }
 
     public void beginningAnimation()
     {
 
+    }
+    
+    public void win()
+    {
+        removeObjects(getObjects(null));
+        
+        setBackground(new GreenfootImage("BackGround_WinScreen.png"));
+        
+        Greenfoot.stop();
     }
 
     public void gameOver()
@@ -133,6 +192,27 @@ public class Stage extends World
         removeObjects(getObjects(null));
         setBackground(new GreenfootImage("HangMan_BackGround.png"));
         showText(null, 600, 75);
+    }
+
+    public void increaseRoomNum()
+    {
+        roomNum++;
+    }
+
+    public static String getPassword()
+    {
+        if(roomNum == 1)
+        {
+            return passwordRoom1;
+        }
+        else if(roomNum == 2)
+        {
+            return passwordRoom2;
+        }
+        else
+        {
+            return passwordRoom3;
+        }
     }
 
     //Utility

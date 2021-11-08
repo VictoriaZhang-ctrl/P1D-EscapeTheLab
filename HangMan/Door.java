@@ -18,6 +18,7 @@ public class Door extends Actor
     Numbers four = new Numbers();
     
     boolean spawned = false;
+    boolean game = false;
     public void act()
     {
         if(this.isTouching(HangMan.class))
@@ -30,6 +31,22 @@ public class Door extends Actor
                 getWorld().addObject(four, 1050, 75);
                 spawned = true;
             }
+        }
+        String password = Stage.getPassword();
+        
+        String a = Integer.toString(one.getCurrentAns());
+        String b = Integer.toString(two.getCurrentAns());
+        String c = Integer.toString(three.getCurrentAns());
+        String d = Integer.toString(four.getCurrentAns());
+        
+        String ans = ""+a+b+c+d;
+        
+        if(ans.equals(password))
+        {
+            World world = getWorld();
+            Stage stage = (Stage)world;
+            
+            stage.increaseRoomNum();
         }
     }
 }
