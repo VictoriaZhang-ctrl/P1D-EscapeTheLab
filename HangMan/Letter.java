@@ -6,16 +6,20 @@ import java.util.Scanner;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Letters extends Actor
+public class Letter extends Actor
 {
+    private char letter;
+    private GreenfootImage image;
     /**
      * Act - do whatever the Letters wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
 
-    public Letters()
+    public Letter(char letter)
     {
-        
+        this.letter = letter;
+        image = new GreenfootImage(Character.toString(letter).toUpperCase() + ".png");
+        setImage(image);
     }
 
     public void act()
@@ -33,7 +37,7 @@ public abstract class Letters extends Actor
             }
             else
             {
-                reportInput();
+                
                 World world = getWorld();
                 Stage stage = (Stage)world;
                 
@@ -43,6 +47,5 @@ public abstract class Letters extends Actor
             }
         }
     }
-    
-    public abstract void reportInput();
 }
+    

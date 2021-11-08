@@ -199,7 +199,7 @@ public class Stage extends World
     {
         //remove all Letters (A, B, C, D, etc.) and resets the Letters displayed on screen
         showText(null, 600, 75);
-        removeObjects(getObjects(Letters.class));   
+        removeObjects(getObjects(Letter.class));   
         spawnCharArray(storeWord.toCharArray());
     }
 
@@ -285,6 +285,7 @@ public class Stage extends World
         }
     }
     //spawn letterCards functions
+    // "hello"
     public void spawnCharArray(char[] arr)
     {
         int size = arr.length;
@@ -301,110 +302,8 @@ public class Stage extends World
     //spawn individual letters
     public void spawnLetter(char letter, int x, int y)
     {
-        if(letter == 'a')
-        {
-            addObject(new A(), x, y);
-        }
-        if(letter == 'b')
-        {
-            addObject(new B(), x, y);
-        }
-        if(letter == 'c')
-        {
-            addObject(new C(), x, y);
-        }
-        if(letter == 'd')
-        {
-            addObject(new D(), x, y);
-        }
-        if(letter == 'e')
-        {
-            addObject(new E(), x, y);
-        }
-        if(letter == 'f')
-        {
-            addObject(new F(), x, y);
-        }
-        if(letter == 'g')
-        {
-            addObject(new G(), x, y);
-        }
-        if(letter == 'h')
-        {
-            addObject(new H(), x, y);
-        }
-        if(letter == 'i')
-        {
-            addObject(new I(), x, y);
-        }
-        if(letter == 'j')
-        {
-            addObject(new J(), x, y);
-        }
-        if(letter == 'k')
-        {
-            addObject(new K(), x, y);
-        }
-        if(letter == 'l')
-        {
-            addObject(new L(), x, y);
-        }
-        if(letter == 'm')
-        {
-            addObject(new M(), x, y);
-        }
-        if(letter == 'n')
-        {
-            addObject(new N(), x, y);
-        }
-        if(letter == 'o')
-        {
-            addObject(new O(), x, y);
-        }
-        if(letter == 'p')
-        {
-            addObject(new P(), x, y);
-        }
-        if(letter == 'q')
-        {
-            addObject(new Q(), x, y);
-        }
-        if(letter == 'r')
-        {
-            addObject(new R(), x, y);
-        }
-        if(letter == 's')
-        {
-            addObject(new S(), x, y);
-        }
-        if(letter == 't')
-        {
-            addObject(new T(), x, y);
-        }
-        if(letter == 'u')
-        {
-            addObject(new U(), x, y);
-        }
-        if(letter == 'v')
-        {
-            addObject(new V(), x, y);
-        }
-        if(letter == 'w')
-        {
-            addObject(new W(), x, y);
-        }
-        if(letter == 'x')
-        {
-            addObject(new X(), x, y);
-        }
-        if(letter == 'y')
-        {
-            addObject(new Y(), x, y);
-        }
-        if(letter == 'z')
-        {
-            addObject(new Z(), x, y);
-        }
+        addObject(new Letter(letter), x, y);
+        
     }
 
 }
