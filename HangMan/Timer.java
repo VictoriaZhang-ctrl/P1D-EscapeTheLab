@@ -26,7 +26,7 @@ public class Timer extends Actor
             World world = getWorld();
             Stage stage = (Stage)world;
             
-            getWorld().addObject(bird, 0, 300);
+            getWorld().addObject(bird, 0, 400);
             allowSpawnBird = false;
         }
     }

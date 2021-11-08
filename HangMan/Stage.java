@@ -28,20 +28,20 @@ public class Stage extends World
     //RoomNum Regulator Variables
     public int roomNum = 0;
     public int roomThreeProgress = 0;
+    
+    //Passwords
+    public String passwordRoom1 = "8096";
+    public String passwordRoom2 = "7345";
+    public String passwordRoom3 = "2022";
 
     GreenfootImage background = new GreenfootImage("BackGround.png");
 
     //All Objects
     HangMan man = new HangMan();
-
     UndoButton undo = new UndoButton(); 
-
     SubmitButton submit = new SubmitButton();
-
     InputBox inputBox = new InputBox();
-
     WordScrambler wordScrambler = new WordScrambler();
-
     Timer timer = new Timer();
 
     String stringToDisplay = "";
@@ -126,29 +126,16 @@ public class Stage extends World
 
     }
 
-    public void endAnimation()
-    {
-
-    }
-
     public void gameOver()
     {
         removeObjects(getObjects(null));
+        
+        setBackground(new GreenfootImage("HangMan_Background.png"));
+        
+        showText(null, 600, 75);
     }
 
     //Utility
-    /*public void fillQueue()
-    {
-    for(int i = 0; i<10; i++)
-    {
-    //randomly chooses a word from a file and puts it into the queue
-    int index = (int)(Math.random() * myList.size());
-    String str = myList.get(index);
-
-    queueOfWords.enqueue(str);
-    }
-    }*/
-
     //All Word Scramble Game-Code Below
     public void scrambleWord_Game()
     {
