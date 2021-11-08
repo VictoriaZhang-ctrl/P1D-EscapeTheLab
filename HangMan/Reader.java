@@ -28,5 +28,28 @@ public class Reader extends Queue{
         in.close();
         return list;
     }
+    private static String RandomThreeList()
+    {
+        //name call myRandom
+        Random myRandom = new Random();
+        String readWords = 1; 
+        String readVerbs = 2;
+        String readAdjectives = 3;
+        int [] threeList = {1,2,3} ;
+        int random = myRandom.nextInt(threeList.length);
+        //random is three list
+        if (random == 1) {
+            random.ArrayList;
+        }else if (random == 2) 
+        {
+            random.ArrayList;
+        }else if (random == 3) 
+        {
+            random(ArrayList<String>);
+        }else 
+        {
+            //do nothing123
+        }
+    }
 }
 
