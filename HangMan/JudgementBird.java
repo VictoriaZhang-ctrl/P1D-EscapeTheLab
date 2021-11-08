@@ -13,15 +13,12 @@ public class JudgementBird extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     int count = 0;
-    World world = getWorld();
-    Stage stage = (Stage)world;
     public void act()
     {
         approachPlayer();
         if(this.isTouching(HangMan.class))
         {
             catchPlayer();
-            stage.gameOver();
         }
         // Add your action code here.
     }
@@ -54,12 +51,15 @@ public class JudgementBird extends Actor
 
     public void catchPlayer()
     {
+        World world = getWorld();
+        Stage stage = (Stage)world;
         setImage(new GreenfootImage("Reach1.png"));
         Greenfoot.delay(5);
         setImage(new GreenfootImage("Reach2.png"));
         Greenfoot.delay(5);
         setImage(new GreenfootImage("Reach3.png"));
         Greenfoot.delay(5);
+        stage.gameOver();
     }
 
 }

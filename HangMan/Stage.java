@@ -30,9 +30,9 @@ public class Stage extends World
     public int roomThreeProgress = 0;
     
     //Passwords
-    public String passwordRoom1 = "8096";
-    public String passwordRoom2 = "7345";
-    public String passwordRoom3 = "2022";
+    public static String passwordRoom1 = "8096";
+    public static String passwordRoom2 = "7345";
+    public static String passwordRoom3 = "2022";
 
     GreenfootImage background = new GreenfootImage("BackGround.png");
 
@@ -98,10 +98,12 @@ public class Stage extends World
     public void prepare_Room1()
     {
         //add Objects
-        addObject(man, 100, 490);
         addObject(new Paper(), 800, 490);
-        addObject(new Paper(), 1100, 490);
+        addObject(new Door(), 1100, 410);
         addObject(timer, 0, 0);
+        
+        addObject(man, 100, 490);
+        
         timer.addTime();
 
         //reset modes & data structures
@@ -129,9 +131,7 @@ public class Stage extends World
     public void gameOver()
     {
         removeObjects(getObjects(null));
-        
-        setBackground(new GreenfootImage("HangMan_Background.png"));
-        
+        setBackground(new GreenfootImage("HangMan_BackGround.png"));
         showText(null, 600, 75);
     }
 
@@ -310,7 +310,6 @@ public class Stage extends World
     public void spawnLetter(char letter, int x, int y)
     {
         addObject(new Letter(letter), x, y);
-
     }
 
 }
