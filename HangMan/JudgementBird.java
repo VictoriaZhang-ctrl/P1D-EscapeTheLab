@@ -17,7 +17,9 @@ public class JudgementBird extends Actor
         approachPlayer();
         if(this.isTouching(HangMan.class))
         {
-            //
+            World world = getWorld();
+            Stage stage = (Stage)world;
+            stage.gameOver();
         }
         // Add your action code here.
     }

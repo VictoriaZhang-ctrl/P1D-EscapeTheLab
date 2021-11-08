@@ -12,7 +12,7 @@ public class Stage extends World
 {
     public int MAX_WordScramble = 10;
 
-    public boolean gameStart = true;
+    public boolean gameStart = false;
     public boolean gameOver = false;
     
     //spawn only once
@@ -65,8 +65,6 @@ public class Stage extends World
 
     public void act()
     {
-        setBackground(background);
-
         //Ready Words
         if(spawnList)
         {
@@ -74,8 +72,19 @@ public class Stage extends World
             fillHashMap();
         }
         spawnList = false;
-
-        prepare_Room1();
+        
+        if(gameStart)
+        {
+            prepare_Room1();
+        }
+        if(roomNum == 2)
+        {
+            prepare_Room2();
+        }
+        if(roomNum == 3)
+        {
+            prepare_Room3();
+        }
     }
 
     public void prepare_Room1()
@@ -97,10 +106,25 @@ public class Stage extends World
             gameStart = false;
         }
     }
+    
+    public void prepare_Room2()
+    {
+        
+    }
+    
+    public void prepare_Room3()
+    {
+        
+    }
 
     public void beginningAnimation()
     {
 
+    }
+    
+    public void endAnimation()
+    {
+        
     }
 
     public void gameOver()
