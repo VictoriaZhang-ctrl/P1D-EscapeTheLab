@@ -37,14 +37,15 @@ public class Letter extends Actor
             }
             else
             {
-                
                 World world = getWorld();
                 Stage stage = (Stage)world;
                 
                 reportLetter();
                 
                 stage.printStack();
+                
                 stage.clearString();
+                
                 world.removeObject(this);
             }
         }

@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Star here.
+ * Write a description of class Door here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Paper extends Actor
+public class Door extends Actor
 {
     /**
-     * Act - do whatever the Star wants to do. This method is called whenever
+     * Act - do whatever the Door wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
@@ -18,15 +18,13 @@ public class Paper extends Actor
         {
             if(Greenfoot.isKeyDown("Space"))
             {
-                World world = getWorld();
-                Stage stage = (Stage)world;
                 
-                stage.changeSpawnStatus();
-                
-                stage.scrambleWord_Game();
-                
-                world.removeObject(this);
             }
         }
+    }
+    
+    public void numLock(String password)
+    {
+        String currentAns = "";
     }
 }

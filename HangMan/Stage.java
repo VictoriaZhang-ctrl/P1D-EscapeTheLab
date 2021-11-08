@@ -14,17 +14,17 @@ public class Stage extends World
 
     public boolean gameStart = false;
     public boolean gameOver = false;
-    
+
     //spawn only once
     public static boolean spawn = true;
     //spawn only one ArrayList
     public static boolean spawnList = true;
-    
+
     public boolean allowSpawnBird = true;
 
     public String correctAns = "";
     public String storeWord = "";
-    
+
     //RoomNum Regulator Variables
     public int roomNum = 0;
     public int roomThreeProgress = 0;
@@ -33,15 +33,15 @@ public class Stage extends World
 
     //All Objects
     HangMan man = new HangMan();
-    
+
     UndoButton undo = new UndoButton(); 
-    
+
     SubmitButton submit = new SubmitButton();
-    
+
     InputBox inputBox = new InputBox();
-    
+
     WordScrambler wordScrambler = new WordScrambler();
-    
+
     Timer timer = new Timer();
 
     String stringToDisplay = "";
@@ -72,8 +72,8 @@ public class Stage extends World
             fillHashMap();
         }
         spawnList = false;
-        
-        if(gameStart)
+
+        if(!gameStart)
         {
             prepare_Room1();
         }
@@ -87,62 +87,66 @@ public class Stage extends World
         }
     }
 
-    public void prepare_Room1()
+    public void gameStart()
     {
-        if(gameStart)
+        if(Greenfoot.isKeyDown("Enter"))
         {
-            //add Objects
-            addObject(man, 100, 490);
-            addObject(new Paper(), 800, 490);
-            addObject(new Paper(), 1100, 490);
-            addObject(timer, 0, 0);
-            timer.addTime();
-
-            //reset modes & data structures
-            man.walkMode();
-            clearStack();
-
-            //set gameStart to FALSE
-            gameStart = false;
+            gameStart = true;
         }
     }
-    
+
+    public void prepare_Room1()
+    {
+        //add Objects
+        addObject(man, 100, 490);
+        addObject(new Paper(), 800, 490);
+        addObject(new Paper(), 1100, 490);
+        addObject(timer, 0, 0);
+        timer.addTime();
+
+        //reset modes & data structures
+        man.walkMode();
+        clearStack();
+
+        gameStart = true;
+    }
+
     public void prepare_Room2()
     {
-        
+
     }
-    
+
     public void prepare_Room3()
     {
-        
+
     }
 
     public void beginningAnimation()
     {
 
     }
-    
+
     public void endAnimation()
     {
-        
+
     }
 
     public void gameOver()
     {
         removeObjects(getObjects(null));
     }
-    
+
     //Utility
     /*public void fillQueue()
     {
-        for(int i = 0; i<10; i++)
-        {
-            //randomly chooses a word from a file and puts it into the queue
-            int index = (int)(Math.random() * myList.size());
-            String str = myList.get(index);
+    for(int i = 0; i<10; i++)
+    {
+    //randomly chooses a word from a file and puts it into the queue
+    int index = (int)(Math.random() * myList.size());
+    String str = myList.get(index);
 
-            queueOfWords.enqueue(str);
-        }
+    queueOfWords.enqueue(str);
+    }
     }*/
 
     //All Word Scramble Game-Code Below
@@ -319,7 +323,7 @@ public class Stage extends World
     public void spawnLetter(char letter, int x, int y)
     {
         addObject(new Letter(letter), x, y);
-        
+
     }
 
 }

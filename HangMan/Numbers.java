@@ -23,7 +23,7 @@ public class Numbers extends Actor
     GreenfootImage seven = new GreenfootImage("7.png");
     GreenfootImage eight = new GreenfootImage("8.png");
     GreenfootImage nine = new GreenfootImage("9.png");
-    
+
     public int currentAns;
 
     /**
@@ -32,33 +32,21 @@ public class Numbers extends Actor
      */
     public void act()
     {
-        fillQueue();
-        
+        if(!queueFilled)
+        {
+            fillQueue();
+        }
         numLock();
     }
 
     public void fillQueue()
     {
-        if(!queueFilled)
+        for(int i = 0; i<10; i++)
         {
-            for(int i = 0; i<10; i++)
-            {
-                num.enqueue(i);
-                image.enqueue(new GreenfootImage(Integer.toString(i) + ".png"));
-            }
-            /*image.enqueue(zero);
-            image.enqueue(one);
-            image.enqueue(two);
-            image.enqueue(three);
-            image.enqueue(four);
-            image.enqueue(five);
-            image.enqueue(six);
-            image.enqueue(seven);
-            image.enqueue(eight);
-            image.enqueue(nine);*/
-            
-            queueFilled = true;
+            num.enqueue(i);
+            image.enqueue(new GreenfootImage(Integer.toString(i) + ".png"));
         }
+        queueFilled = true;
     }
 
     public void numLock()
@@ -67,14 +55,15 @@ public class Numbers extends Actor
         {
             int x = num.dequeue();
             num.enqueue(x);
-            
+            currentAns = x;
+
             GreenfootImage i = image.dequeue();
             image.enqueue(i);
-            
+
             setImage(i);
         }
     }
-    
+
     public int getCurrentAns()
     {
         return currentAns;
