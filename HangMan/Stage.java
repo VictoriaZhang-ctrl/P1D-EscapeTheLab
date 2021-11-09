@@ -30,7 +30,7 @@ public class Stage extends World
     public String storeWord = "";
 
     //RoomNum Regulator Variables
-    public static int roomNum = 0;
+    public int roomNum = 0;
     public int roomThreeProgress = 0;
 
     //Passwords
@@ -110,6 +110,7 @@ public class Stage extends World
     
     public void beginningAnimation()
     {
+        setBackground(new GreenfootImage("HangedMen_Background.png"));
         roomNum++;
     }
 
@@ -212,7 +213,7 @@ public class Stage extends World
         roomNum++;
     }
 
-    public static String getPassword()
+    public String getPassword()
     {
         if(roomNum == 1)
         {
@@ -321,6 +322,7 @@ public class Stage extends World
         else if(roomNum == 3 && roomThreeProgress == 0)
         {
             showText("The first part of the password is 20", 600, 75);
+            roomThreeProgress++;
         }
         else
         {

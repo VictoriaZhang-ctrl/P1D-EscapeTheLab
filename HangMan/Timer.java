@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Timer extends Actor
 {
     static int time;
+    static int count;
     static boolean allowSpawnBird = true;
     JudgementBird bird = new JudgementBird();
     /**

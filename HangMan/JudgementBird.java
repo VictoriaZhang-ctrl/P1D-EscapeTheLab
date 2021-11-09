@@ -68,5 +68,4 @@ public class JudgementBird extends Actor
         Greenfoot.delay(15);
         stage.gameOver();
     }
-
 }

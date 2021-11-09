@@ -133,4 +133,5 @@ public class HangMan extends Actor
     {
         inGame = true;
     }
+    
 }

@@ -25,6 +25,7 @@ public class Door extends Actor
         {
             if(Greenfoot.isKeyDown("Space") && spawned == false)
             {
+                getWorld().showText(null, 600, 75);
                 getWorld().addObject(one, 150, 75);
                 getWorld().addObject(two, 450, 75);
                 getWorld().addObject(three, 750, 75);
@@ -32,7 +33,8 @@ public class Door extends Actor
                 spawned = true;
             }
         }
-        String password = Stage.getPassword();
+        Stage stage = (Stage)(getWorld());
+        String password = stage.getPassword();
         
         String a = Integer.toString(one.getCurrentAns());
         String b = Integer.toString(two.getCurrentAns());
@@ -43,9 +45,6 @@ public class Door extends Actor
         
         if(ans.equals(password))
         {
-            World world = getWorld();
-            Stage stage = (Stage)world;
-            
             stage.increaseRoomNum();
         }
     }
