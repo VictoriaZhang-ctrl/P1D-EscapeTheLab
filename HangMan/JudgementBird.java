@@ -19,6 +19,7 @@ public class JudgementBird extends Actor
         if(this.isTouching(HangMan.class))
         {
             catchPlayer();
+            Greenfoot.playSound("Game Over Sound Effects High Quality.mp3");
         }
         // Add your action code here.
     }
