@@ -14,6 +14,27 @@ public class HangedMan extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        World world = getWorld();
+        Stage stage = (Stage)world;
+
+        endAnimation();
+        
+        Greenfoot.delay(50);
+        
+        world.removeObjects(world.getObjects(null));
+        
+        stage.setBackground(new GreenfootImage("GameOverScreen.png"));
+        
+        Greenfoot.stop();
+    }
+    
+    public void endAnimation()
+    {
+        for(int i = 0; i<5; i++)
+        {
+            Greenfoot.delay(10);
+            setLocation(getX(), getY()+20);
+            Greenfoot.delay(10);
+        }
     }
 }

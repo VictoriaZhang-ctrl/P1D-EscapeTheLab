@@ -53,12 +53,19 @@ public class JudgementBird extends Actor
     {
         World world = getWorld();
         Stage stage = (Stage)world;
+        
+        world.removeObjects(world.getObjects(Letter.class));
+        world.removeObjects(world.getObjects(InputBox.class));
+        world.removeObjects(world.getObjects(SubmitButton.class));
+        world.removeObjects(world.getObjects(UndoButton.class));
+        
+        Greenfoot.delay(15);
         setImage(new GreenfootImage("Reach1.png"));
-        Greenfoot.delay(5);
+        Greenfoot.delay(15);
         setImage(new GreenfootImage("Reach2.png"));
-        Greenfoot.delay(5);
+        Greenfoot.delay(15);
         setImage(new GreenfootImage("Reach3.png"));
-        Greenfoot.delay(5);
+        Greenfoot.delay(15);
         stage.gameOver();
     }
 

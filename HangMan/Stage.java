@@ -31,6 +31,7 @@ public class Stage extends World
 
     //RoomNum Regulator Variables
     public static int roomNum = 0;
+    public int roomThreeProgress = 0;
 
     //Passwords
     public static String passwordRoom1 = "8096";
@@ -46,7 +47,7 @@ public class Stage extends World
     InputBox inputBox = new InputBox();
     WordScrambler wordScrambler = new WordScrambler();
     Timer timer = new Timer();
-
+    
     String stringToDisplay = "";
 
     //All Data Structures
@@ -78,6 +79,10 @@ public class Stage extends World
 
         if(!gameStart)
         {
+            gameStart();
+        }
+        if(roomNum == 1)
+        {
             prepare_Room1();
         }
         if(roomNum == 2)
@@ -99,7 +104,13 @@ public class Stage extends World
         if(Greenfoot.isKeyDown("Enter"))
         {
             gameStart = true;
+            beginningAnimation();
         }
+    }
+    
+    public void beginningAnimation()
+    {
+        roomNum++;
     }
 
     public void prepare_Room1()
@@ -108,10 +119,12 @@ public class Stage extends World
         {
             //add Objects
             removeObjects(getObjects(null));
+            setBackground(background);
 
             roomNum = 1;
+            timer.allowSpawnBird();
 
-            addObject(new Paper(), 800, 490);
+            addObject(new Paper(), 700, 480);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
 
@@ -123,7 +136,7 @@ public class Stage extends World
             man.walkMode();
             clearStack();
 
-            gameStart = true;
+            roomOnePrep = true;
         }
     }
 
@@ -133,8 +146,9 @@ public class Stage extends World
         {
             removeObjects(getObjects(null));
             roomNum = 2;
+            timer.allowSpawnBird();
             
-            addObject(new Paper(), 1000, 490);
+            addObject(new Paper(), 510, 400);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
 
@@ -156,8 +170,10 @@ public class Stage extends World
         {
             removeObjects(getObjects(null));
             roomNum = 3;
+            timer.allowSpawnBird();
             
-            addObject(new Paper(), 500, 490);
+            addObject(new Paper(), 500, 410);
+            addObject(new Paper(), 850, 560);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
 
@@ -171,11 +187,6 @@ public class Stage extends World
             
             roomThreePrep = true;
         }
-    }
-
-    public void beginningAnimation()
-    {
-
     }
     
     public void win()
@@ -192,6 +203,8 @@ public class Stage extends World
         removeObjects(getObjects(null));
         setBackground(new GreenfootImage("HangMan_BackGround.png"));
         showText(null, 600, 75);
+        
+        addObject(new HangedMan(), 600, 100);
     }
 
     public void increaseRoomNum()
@@ -296,7 +309,23 @@ public class Stage extends World
         removeObjects(getObjects(InputBox.class));
         removeObjects(getObjects(SubmitButton.class));
         removeObjects(getObjects(UndoButton.class));
-        showText(null, 600, 75);
+        
+        if(roomNum == 1)
+        {
+            showText("The password is 8096", 600, 75);
+        }
+        else if(roomNum == 2)
+        {
+            showText("The password is 7345", 600, 75);
+        }
+        else if(roomNum == 3 && roomThreeProgress == 0)
+        {
+            showText("The first part of the password is 20", 600, 75);
+        }
+        else
+        {
+            showText("The second part of the password is 22", 600, 75);
+        }
     }
 
     //Utility Functions
