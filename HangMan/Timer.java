@@ -30,11 +30,12 @@ public class Timer extends Actor
             getWorld().addObject(bird, 0, 400);
             allowSpawnBird = false;
         }
+        count++;
     }
     
     public static void addTime()
     {
-        time += 500;
+        time += 200;
     }
     
     public static void allowSpawnBird()

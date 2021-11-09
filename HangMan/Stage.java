@@ -47,6 +47,7 @@ public class Stage extends World
     InputBox inputBox = new InputBox();
     WordScrambler wordScrambler = new WordScrambler();
     Timer timer = new Timer();
+    Rules ruleButton = new Rules();
     
     String stringToDisplay = "";
 
@@ -80,6 +81,7 @@ public class Stage extends World
         if(!gameStart)
         {
             gameStart();
+            addObject(ruleButton, 1100, 550);
         }
         if(roomNum == 1)
         {
@@ -104,16 +106,10 @@ public class Stage extends World
         if(Greenfoot.isKeyDown("Enter"))
         {
             gameStart = true;
-            beginningAnimation();
+            roomNum++;
         }
     }
     
-    public void beginningAnimation()
-    {
-        setBackground(new GreenfootImage("HangedMen_Background.png"));
-        roomNum++;
-    }
-
     public void prepare_Room1()
     {
         if(!roomOnePrep)
@@ -191,9 +187,11 @@ public class Stage extends World
     
     public void win()
     {
+        String totalTime = Integer.toString(Timer.count); 
         removeObjects(getObjects(null));
         
         setBackground(new GreenfootImage("BackGround_WinScreen.png"));
+        showText(totalTime, 600, 500);
         
         Greenfoot.stop();
     }

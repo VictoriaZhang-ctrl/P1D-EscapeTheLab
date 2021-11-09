@@ -5,6 +5,7 @@ class.HangedMan.image=Hanged_Man.png
 class.JudgementBird.image=BirdofJudgement.png
 class.Numbers.image=0.png
 class.Paper.image=Paper.png
+class.Rules.image=Rules.png
 class.Stage.image=BackGround_StarterPage.png
 dependency1.from=Stage
 dependency1.to=HangMan
