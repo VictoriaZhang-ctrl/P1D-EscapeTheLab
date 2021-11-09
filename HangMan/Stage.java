@@ -122,7 +122,6 @@ public class Stage extends World
             removeObjects(getObjects(null));
             setBackground(background);
 
-            roomNum = 1;
             timer.allowSpawnBird();
 
             addObject(new Paper(), 700, 480);
@@ -146,7 +145,7 @@ public class Stage extends World
         if(!roomTwoPrep)
         {
             removeObjects(getObjects(null));
-            roomNum = 2;
+
             timer.allowSpawnBird();
             
             addObject(new Paper(), 510, 400);
@@ -170,7 +169,7 @@ public class Stage extends World
         if(!roomThreePrep)
         {
             removeObjects(getObjects(null));
-            roomNum = 3;
+
             timer.allowSpawnBird();
             
             addObject(new Paper(), 500, 410);
