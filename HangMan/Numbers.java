@@ -53,6 +53,7 @@ public class Numbers extends Actor
     {
         if(Greenfoot.mouseClicked(this))
         {
+            Greenfoot.playSound("Lock Pick.mp3");
             int x = num.dequeue();
             num.enqueue(x);
             currentAns = x;
