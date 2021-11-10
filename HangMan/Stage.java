@@ -33,9 +33,9 @@ public class Stage extends World
     public boolean roomThreePrep = false;
 
     //Passwords
-    public static String passwordRoom1 = "8096";
-    public static String passwordRoom2 = "7345";
-    public static String passwordRoom3 = "2022";
+    public static String passwordRoom1;
+    public static String passwordRoom2;
+    public static String passwordRoom3;
 
     GreenfootImage background = new GreenfootImage("BackGround.png");
     GreenfootSound bgm = new GreenfootSound("dark-relaxing-ambient-10275.mp3");
@@ -122,6 +122,9 @@ public class Stage extends World
         {
             fillListOfWords();
             fillHashMap();
+            passwordRoom1 = setPassword();
+            passwordRoom2 = setPassword();
+            passwordRoom3 = setPassword();
         }
         spawnList = false;
         bgm.playLoop();
@@ -235,6 +238,17 @@ public class Stage extends World
         Greenfoot.playSound("mixkit-gear-metallic-lock-sound-2858.wav");
         roomNum++;
     }
+    
+    public String setPassword()
+    {
+        String password = "";
+        for(int i = 0; i<4; i++)
+        {
+            String str = Integer.toString((int)(Math.random() * 9));
+            password += str;
+        }
+        return password;
+    }
 
     public String getPassword()
     {
@@ -338,20 +352,20 @@ public class Stage extends World
 
         if(roomNum == 1)
         {
-            showText("The password is 8096", 600, 75);
+            showText("The password is " + passwordRoom1, 600, 75);
         }
         else if(roomNum == 2)
         {
-            showText("The password is 7345", 600, 75);
+            showText("The password is " + passwordRoom2, 600, 75);
         }
         else if(roomNum == 3 && roomThreeProgress == 0)
         {
-            showText("The first part of the password is 20", 600, 75);
+            showText("The password is " + passwordRoom3.substring(0,2), 600, 75);
             roomThreeProgress++;
         }
         else
         {
-            showText("The second part of the password is 22", 600, 75);
+            showText("The password is " + passwordRoom3.substring(2,4), 600, 75);
         }
     }
 
