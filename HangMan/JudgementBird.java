@@ -28,6 +28,7 @@ public class JudgementBird extends Actor
         count++;
         if(count == 100)
         {
+            Greenfoot.playSound("mixkit-hard-horror-hit-drum-565.wav");
             setImage(new GreenfootImage("Walk1.png"));
             move(10);
         }
@@ -38,6 +39,7 @@ public class JudgementBird extends Actor
         }
         if(count == 200)
         {
+            Greenfoot.playSound("mixkit-hard-horror-hit-drum-565.wav");
             setImage(new GreenfootImage("Walk3.png"));
             move(10);
         }
@@ -66,6 +68,9 @@ public class JudgementBird extends Actor
         Greenfoot.delay(15);
         setImage(new GreenfootImage("Reach3.png"));
         Greenfoot.delay(15);
+        
+        Greenfoot.playSound("mixkit-gore-video-game-blood-splash-263.wav");
+        
         stage.gameOver();
     }
 }

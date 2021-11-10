@@ -29,6 +29,7 @@ public class Letter extends Actor
             MouseInfo mouse = Greenfoot.getMouseInfo();
             setLocation(mouse.getX(), mouse.getY());
         }
+        //Enter Letter via Dragging
         if (Greenfoot.mouseDragEnded(this))
         {
             if(!this.isTouching(InputBox.class))
@@ -39,25 +40,39 @@ public class Letter extends Actor
             {
                 World world = getWorld();
                 Stage stage = (Stage)world;
-                
+
                 reportLetter();
-                
+
                 stage.printStack();
-                
+
                 stage.clearString();
-                
+
                 world.removeObject(this);
             }
         }
+        //Enter Letter via KeyBoard
+        if(Greenfoot.isKeyDown(Character.toString(letter)))
+        {
+            World world = getWorld();
+            Stage stage = (Stage)world;
+
+            reportLetter();
+
+            stage.printStack();
+
+            stage.clearString();
+
+            world.removeObject(this);
+        }
     }
-    
+
     public void reportLetter()
     {
         World world = getWorld();
         Stage stage = (Stage)world;
-        
+
         Stack stack = stage.getStack();
         stack.push(letter);
     }
 }
-    
+

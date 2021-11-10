@@ -15,15 +15,11 @@ public class Stage extends World
     public boolean gameStart = false;
     public boolean gameOver = false;
 
-    //spawn only once
+    public int difficulty = 0;
+
+    //Spawn Regulator Variables
     public static boolean spawn = true;
-    //spawn only one ArrayList
     public static boolean spawnList = true;
-
-    public boolean roomOnePrep = false;
-    public boolean roomTwoPrep = false;
-    public boolean roomThreePrep = false;
-
     public boolean allowSpawnBird = true;
 
     public String correctAns = "";
@@ -32,13 +28,17 @@ public class Stage extends World
     //RoomNum Regulator Variables
     public int roomNum = 0;
     public int roomThreeProgress = 0;
+    public boolean roomOnePrep = false;
+    public boolean roomTwoPrep = false;
+    public boolean roomThreePrep = false;
 
     //Passwords
-    public static String passwordRoom1 = "8096";
-    public static String passwordRoom2 = "7345";
-    public static String passwordRoom3 = "2022";
+    public static String passwordRoom1;
+    public static String passwordRoom2;
+    public static String passwordRoom3;
 
     GreenfootImage background = new GreenfootImage("BackGround.png");
+    GreenfootSound bgm = new GreenfootSound("dark-relaxing-ambient-10275.mp3");
 
     //All Objects
     HangMan man = new HangMan();
@@ -48,7 +48,9 @@ public class Stage extends World
     WordScrambler wordScrambler = new WordScrambler();
     Timer timer = new Timer();
     Rules ruleButton = new Rules();
-    
+
+    String text = "";
+
     String stringToDisplay = "";
 
     //All Data Structures
@@ -70,19 +72,12 @@ public class Stage extends World
 
     public void act()
     {
-        //Ready Words
-        if(spawnList)
-        {
-            fillListOfWords();
-            fillHashMap();
-        }
-        spawnList = false;
-
         if(!gameStart)
         {
-            gameStart();
             addObject(ruleButton, 1100, 550);
+            gameStart();
         }
+
         if(roomNum == 1)
         {
             prepare_Room1();
@@ -105,11 +100,37 @@ public class Stage extends World
     {
         if(Greenfoot.isKeyDown("Enter"))
         {
+            Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
             gameStart = true;
-            roomNum++;
+            removeObject(ruleButton);
+            setBackground(new GreenfootImage("GreyBackDrop.png"));
+            addObject(new DifficultyButton(1), 300, 200);
+            addObject(new DifficultyButton(2), 600, 200);
+            addObject(new DifficultyButton(3), 900, 200);
         }
     }
     
+    public void setDifficulty(int setDifficulty)
+    {
+        difficulty = setDifficulty;
+    }
+    
+    public void difficultySelected()
+    {
+        //Ready Words
+        if(spawnList)
+        {
+            fillListOfWords();
+            fillHashMap();
+            passwordRoom1 = setPassword();
+            passwordRoom2 = setPassword();
+            passwordRoom3 = setPassword();
+        }
+        spawnList = false;
+        bgm.playLoop();
+        roomNum++;
+    }
+
     public void prepare_Room1()
     {
         if(!roomOnePrep)
@@ -143,7 +164,7 @@ public class Stage extends World
             removeObjects(getObjects(null));
 
             timer.allowSpawnBird();
-            
+
             addObject(new Paper(), 510, 400);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
@@ -155,7 +176,7 @@ public class Stage extends World
             //reset modes & data structures
             man.walkMode();
             clearStack();
-            
+
             roomTwoPrep = true;
         }
     }
@@ -167,7 +188,7 @@ public class Stage extends World
             removeObjects(getObjects(null));
 
             timer.allowSpawnBird();
-            
+
             addObject(new Paper(), 500, 410);
             addObject(new Paper(), 850, 560);
             addObject(new Door(), 1100, 410);
@@ -180,34 +201,53 @@ public class Stage extends World
             //reset modes & data structures
             man.walkMode();
             clearStack();
-            
+
             roomThreePrep = true;
         }
     }
-    
+
     public void win()
     {
-        String totalTime = Integer.toString(Timer.count); 
+        bgm.stop();
+        Greenfoot.playSound("138 Spotted! Twins.mp3");
+        
+        String totalTime = Integer.toString(Timer.count/100); 
         removeObjects(getObjects(null));
-        
+
         setBackground(new GreenfootImage("BackGround_WinScreen.png"));
-        showText(totalTime, 600, 500);
+
+        text = "It took you " + totalTime + " seconds to escape!";
+        addObject(new displayText(text), 600, 550);
         
+        getBackground().drawImage(new GreenfootImage("StickMan_Happy.png"), 550, 270);
         Greenfoot.stop();
     }
 
     public void gameOver()
     {
+        bgm.stop();
         removeObjects(getObjects(null));
         setBackground(new GreenfootImage("HangMan_BackGround.png"));
         showText(null, 600, 75);
-        
+
         addObject(new HangedMan(), 600, 100);
     }
 
     public void increaseRoomNum()
     {
+        Greenfoot.playSound("mixkit-gear-metallic-lock-sound-2858.wav");
         roomNum++;
+    }
+    
+    public String setPassword()
+    {
+        String password = "";
+        for(int i = 0; i<4; i++)
+        {
+            String str = Integer.toString((int)(Math.random() * 9));
+            password += str;
+        }
+        return password;
     }
 
     public String getPassword()
@@ -242,7 +282,6 @@ public class Stage extends World
             correctAns = ans;
             storeWord = str;
 
-            System.out.println(ans);
             spawnCharArray(str.toCharArray());
             spawn = false;
         }
@@ -296,6 +335,7 @@ public class Stage extends World
     public void incorrect()
     {
         //remove all Letters (A, B, C, D, etc.) and resets the Letters displayed on screen
+        Greenfoot.playSound("mixkit-wrong-electricity-buzz-955.wav");
         showText(null, 600, 75);
         removeObjects(getObjects(Letter.class));   
         spawnCharArray(storeWord.toCharArray());
@@ -303,27 +343,28 @@ public class Stage extends World
 
     public void correct()
     {
+        Greenfoot.playSound("correct.mp3");
         man.walkMode();
         removeObjects(getObjects(InputBox.class));
         removeObjects(getObjects(SubmitButton.class));
         removeObjects(getObjects(UndoButton.class));
-        
+
         if(roomNum == 1)
         {
-            showText("The password is 8096", 600, 75);
+            showText("The password is " + passwordRoom1, 600, 75);
         }
         else if(roomNum == 2)
         {
-            showText("The password is 7345", 600, 75);
+            showText("The password is " + passwordRoom2, 600, 75);
         }
         else if(roomNum == 3 && roomThreeProgress == 0)
         {
-            showText("The first part of the password is 20", 600, 75);
+            showText("The password is " + passwordRoom3.substring(0,2), 600, 75);
             roomThreeProgress++;
         }
         else
         {
-            showText("The second part of the password is 22", 600, 75);
+            showText("The password is " + passwordRoom3.substring(2,4), 600, 75);
         }
     }
 
@@ -374,18 +415,6 @@ public class Stage extends World
         return stackOfLetters;
     }
 
-    public void fillListOfWords()
-    {
-        try
-        {
-            Reader.readInto(myList);
-        }
-        catch(Exception e)
-        {
-
-        }
-    }
-
     //set up HashMap of scrambled | unscrambled words from URL
     public void fillHashMap()
     {
@@ -395,12 +424,39 @@ public class Stage extends World
             int index = (int)(Math.random() * myList.size());
             String str = myList.get(index);
 
-            //fills map {scrambled: unscrambled}
-            wordScrambler.fill(str);
+            if(difficulty == 1)
+            {
+                while(str.length() > 4 || str.length() < 3)
+                {
+                    index = (int)(Math.random() * myList.size());
+                    str = myList.get(index);
+                }
+                //fills map {scrambled: unscrambled}
+                wordScrambler.fill(str);
+            }
+            else if(difficulty == 2)
+            {
+                while(str.length() > 5 || str.length() < 4)
+                {
+                    index = (int)(Math.random() * myList.size());
+                    str = myList.get(index);
+                }
+                //fills map {scrambled: unscrambled}
+                wordScrambler.fill(str);
+            }
+            else
+            {
+                while(str.length() < 6)
+                {
+                    index = (int)(Math.random() * myList.size());
+                    str = myList.get(index);
+                }
+                wordScrambler.fill(str);
+            }
         }
     }
+    
     //spawn letterCards functions
-    // "hello"
     public void spawnCharArray(char[] arr)
     {
         int size = arr.length;
@@ -414,10 +470,22 @@ public class Stage extends World
             spawnLetter(arr[i], 80+x*i, y);
         }
     }
+    
     //spawn individual letters
     public void spawnLetter(char letter, int x, int y)
     {
         addObject(new Letter(letter), x, y);
     }
+    
+    public void fillListOfWords()
+    {
+        try
+        {
+            Reader.readInto(myList);
+        }
+        catch(Exception e)
+        {
 
+        }
+    }
 }

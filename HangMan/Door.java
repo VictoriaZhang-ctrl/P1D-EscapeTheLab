@@ -45,6 +45,8 @@ public class Door extends Actor
         
         if(ans.equals(password))
         {
+            Greenfoot.playSound("mixkit-gaming-lock-2848.wav");
+            Greenfoot.delay(50);
             stage.increaseRoomNum();
         }
     }
