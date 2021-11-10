@@ -1,7 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HangedMan here.
+ * Is used in an animation in when the players gets a Game Over.
+ * Does not serve any other function.
  */
 public class HangedMan extends Actor
 {

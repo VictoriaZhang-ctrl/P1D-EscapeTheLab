@@ -11,7 +11,8 @@ public class Paper extends Actor
      */
     public void act()
     {
-        // This will run if the player pressed the space bar while the hangman is touching the paper
+        //If the player interacts with the Paper by pressing "Space"
+        //They will be required to complete the WordScramble game.
         if(this.isTouching(HangMan.class))
         {
             if(Greenfoot.isKeyDown("Space"))
@@ -19,9 +20,8 @@ public class Paper extends Actor
                 World world = getWorld();
                 Stage stage = (Stage)world;
                 
-                // The stage will change to the word scramble game after the paper was pressed
+                //allows for words to be spawned ONCE
                 stage.changeSpawnStatus();
-                
                 stage.beginWordScrambleGame();
                 
                 world.removeObject(this);

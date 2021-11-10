@@ -2,8 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Timer extends Actor
 {
-    static int time;
-    static int count;
+    static int time;        //the amount of time until JudgementBird is spawned.
+    static int count;       //to display at the end, once the player wins.
     static boolean allowSpawnBird = true;
     JudgementBird bird = new JudgementBird();
     /**
@@ -34,7 +34,8 @@ public class Timer extends Actor
         time += 1000;
     }
     
-    //Spwan the JudgementBird
+    //Allow for the spawn of the bird.
+    //Called everytime the player enters a new room.
     public static void allowSpawnBird()
     {
         allowSpawnBird = true;

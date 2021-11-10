@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-
+// A class for the player to interact with when they want to finalize their answer.
 public class SubmitButton extends Actor
 {
     /**
@@ -8,8 +8,7 @@ public class SubmitButton extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
-    {   
-        //it will play the wsubmit sound and renew to a new stage by use mouse or enter key to control
+    {  
         if(Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("Enter"))
         {
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");

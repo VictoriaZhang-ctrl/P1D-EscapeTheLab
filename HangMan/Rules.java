@@ -1,17 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// A class for the player to see and choose a difficulty.
 
 public class Rules extends Actor
 {
-    /**
-     * Act - do whatever the Rules wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    int showImage = 0;
+    int showImage = 0;  //determines which instructions are shown on-screen
     public void act()
     {
-        //When the Mouse arrow clicked the image and the stage will change to another image, also the clicking will play once the mouse clicked it.
-        //and return to beginning stage
+        //Everytime the player clicks "Rules", it shows instructions on
+        //how to play the game.
         if(Greenfoot.mouseClicked(this))
         {
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
