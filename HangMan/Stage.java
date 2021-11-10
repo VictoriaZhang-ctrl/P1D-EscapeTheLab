@@ -8,8 +8,6 @@ public class Stage extends World
 
 {
     //class varaibles
-    public int MAX_WordScramble = 10;
-
     public boolean gameStart = false;
     public boolean gameOver = false;
 
@@ -21,8 +19,8 @@ public class Stage extends World
     public boolean allowSpawnBird = true;
 
     public String correctAns = "";
-    public String storeWord = "";
-    
+    public String storeScrambledWord = "";
+
     String text = "";
     String stringToDisplay = "";
 
@@ -75,25 +73,25 @@ public class Stage extends World
             addObject(ruleButton, 1100, 550);
             showTitleScreen();
         }
-           
+
         // If the player is on room 1, the things in room 1 will spawn
         if(roomNum == 1)
         {
             prepare_Room1();
         }
-        
+
         // If the player is on room 2, the things in room 2 will spawn
         if(roomNum == 2)
         {
             prepare_Room2();
         }
-        
+
         // If the player is on room 3, the things in room 3 will spawn
         if(roomNum == 3)
         {
             prepare_Room3();
         }
-        
+
         // If the player is on room 4, it is the winning screen, and the things in room 4 will spawn
         if(roomNum == 4)
         {
@@ -109,37 +107,32 @@ public class Stage extends World
         {
             // The background sound will play
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
-            
+
             // The rule button will be removed and the difficulty buttons will spawn
             removeObject(ruleButton);
             setBackground(new GreenfootImage("GreyBackDrop.png"));
             addObject(new DifficultyButton(1), 300, 200);
             addObject(new DifficultyButton(2), 600, 200);
             addObject(new DifficultyButton(3), 900, 200);
-            
+
             gameStart = true;
         }
     }
-    
+
     public void setDifficulty(int setDifficulty)
     {
         difficulty = setDifficulty;
     }
-    
+
     // Once the difficulty is selected the list of words for that difficulty will spawn
     public void difficultySelected()
     {
-        //Ready Words
-        if(spawnList)
-        {
-            fillListOfWords();
-            fillHashMap();
-            passwordRoom1 = setRandomizedPassword();
-            passwordRoom2 = setRandomizedPassword();
-            passwordRoom3 = setRandomizedPassword();
-        }
-        spawnList = false;
-        
+        fillListOfWords();
+
+        passwordRoom1 = setRandomizedPassword();
+        passwordRoom2 = setRandomizedPassword();
+        passwordRoom3 = setRandomizedPassword();
+
         //Play BGM & Begin Game
         bgm.playLoop();
         roomNum++;
@@ -156,7 +149,7 @@ public class Stage extends World
 
             // The timer rill run to see when the judgement bird should spawn
             timer.allowSpawnBird();
-            
+
             // The objects will be added
             addObject(new Paper(), 700, 480);
             addObject(new Door(), 1100, 410);
@@ -239,7 +232,7 @@ public class Stage extends World
         bgm.stop();
         // The winning music will play
         Greenfoot.playSound("138 Spotted! Twins.mp3");
-        
+
         // This will return the total amount of time it took the player to escape
         String totalTime = Integer.toString(Timer.count/100); 
         removeObjects(getObjects(null));
@@ -250,7 +243,7 @@ public class Stage extends World
         // This will tell the player how long it took them to escape
         text = "It took you " + totalTime + " seconds to escape!";
         addObject(new displayText(text), 600, 550);
-        
+
         // The stickman will change to a happy stickman
         getBackground().drawImage(new GreenfootImage("StickMan_Happy.png"), 550, 270);
         // The game will stop running
@@ -279,7 +272,7 @@ public class Stage extends World
         Greenfoot.playSound("mixkit-gear-metallic-lock-sound-2858.wav");
         roomNum++;
     }
-    
+
     // This makes a different combination for the lock every time
     public String setRandomizedPassword()
     {
@@ -316,7 +309,7 @@ public class Stage extends World
     {
         //disables the player's ability to walk around.
         man.gameMode();
-        
+
         // if(spawn) ensures that the code within the if-loop is run only once
         // Only one set of letters should be displayed on-screen
         if(spawn)
@@ -325,12 +318,12 @@ public class Stage extends World
             addObject(undo, 1000, 200);
             addObject(submit, 1000, 150);
 
-            String str = wordScrambler.getRandomWord(map);
-            String ans = wordScrambler.getValue(str, map);
-            correctAns = ans;
-            storeWord = str;
+            String unscrambledWord = getRandomWordFromFile(difficulty);
+            String scrambledWord = wordScrambler.scrambleWord(unscrambledWord);
+            correctAns = unscrambledWord;
+            storeScrambledWord = scrambledWord;
 
-            spawnCharArray(str.toCharArray());
+            spawnCharArray(scrambledWord.toCharArray());
             spawn = false;
         }
     }
@@ -387,7 +380,7 @@ public class Stage extends World
         Greenfoot.playSound("mixkit-wrong-electricity-buzz-955.wav");
         showText(null, 600, 75);
         removeObjects(getObjects(Letter.class));   
-        spawnCharArray(storeWord.toCharArray());
+        spawnCharArray(storeScrambledWord.toCharArray());
     }
 
     // This will run if the answer is correct
@@ -451,7 +444,7 @@ public class Stage extends World
         stringToDisplay = "";
     }
 
-    // This clears what the player currently has by popping off the letters
+    // This clears what the player currently has by popping off all the letters
     public void clearStack()
     {
         while(!stackOfLetters.isEmpty())
@@ -460,57 +453,27 @@ public class Stage extends World
         }
     }
 
-    public static HashMap getHashMap()
-    {
-        return map;
-    }
-
     public static Stack getStack()
     {
         return stackOfLetters;
     }
 
-    //set up HashMap of scrambled | unscrambled words from URL
-    public void fillHashMap()
+    public String getRandomWordFromFile(int difficulty)
     {
-        for(int i = 0; i<20; i++)
-        {
-            //randomly chooses a word from a file and puts it into the map
-            int index = (int)(Math.random() * myList.size());
-            String str = myList.get(index);
+        int appropriateSize = difficulty + 2;
 
-            if(difficulty == 1)
-            {
-                while(str.length() > 4 || str.length() < 3)
-                {
-                    index = (int)(Math.random() * myList.size());
-                    str = myList.get(index);
-                }
-                //fills map {scrambled: unscrambled}
-                wordScrambler.fill(str);
-            }
-            else if(difficulty == 2)
-            {
-                while(str.length() > 5 || str.length() < 4)
-                {
-                    index = (int)(Math.random() * myList.size());
-                    str = myList.get(index);
-                }
-                //fills map {scrambled: unscrambled}
-                wordScrambler.fill(str);
-            }
-            else
-            {
-                while(str.length() < 6)
-                {
-                    index = (int)(Math.random() * myList.size());
-                    str = myList.get(index);
-                }
-                wordScrambler.fill(str);
-            }
+        int index = (int)(Math.random() * myList.size());
+        String str = myList.get(index);
+
+        while(str.length() < appropriateSize || str.length() > appropriateSize + 1)
+        {
+            index = (int)(Math.random() * myList.size());
+            str = myList.get(index);
         }
+
+        return str;
     }
-    
+
     //spawn letterCards functions
     public void spawnCharArray(char[] arr)
     {
@@ -525,13 +488,13 @@ public class Stage extends World
             spawnLetter(arr[i], 80+x*i, y);
         }
     }
-    
+
     //spawn individual letters
     public void spawnLetter(char letter, int x, int y)
     {
         addObject(new Letter(letter), x, y);
     }
-    
+
     public void fillListOfWords()
     {
         try

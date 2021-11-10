@@ -4,7 +4,7 @@ import java.util.*;
 
 public class WordScrambler
 {
-    public static String scrambled(String word)
+    public static String scrambleWord(String word)
     {
         String shuffledWord = word; //original
         int wordSize = word.length(); //make letter of the word equal to the length
@@ -30,6 +30,7 @@ public class WordScrambler
         return new String(charArray);//return method
     }
     
+    /*
     //fills HashMap with {key: scrambled word | value: unscrambled word}
     public static void fill(String word)
     {
@@ -53,4 +54,5 @@ public class WordScrambler
     {
         return map.get(key); //return method
     }
+    */
 }
