@@ -2,9 +2,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class Numbers here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 public class Numbers extends Actor
 {
@@ -12,7 +9,8 @@ public class Numbers extends Actor
     Queue<GreenfootImage> image = new Queue<GreenfootImage>();
 
     boolean queueFilled = false;
-
+    
+    // These are all the images for the numbers 1 through 9
     GreenfootImage zero = new GreenfootImage("0.png");
     GreenfootImage one = new GreenfootImage("1.png");
     GreenfootImage two = new GreenfootImage("2.png");
@@ -32,15 +30,18 @@ public class Numbers extends Actor
      */
     public void act()
     {
+        // This will fill the combination and lock the lock
         if(!queueFilled)
         {
             fillQueue();
         }
         numLock();
     }
-
+    
+    // This is the method to fill the combination 
     public void fillQueue()
     {
+        // The numbers will be enqueued and their correct pictures will be the combination
         for(int i = 0; i<10; i++)
         {
             num.enqueue(i);
@@ -51,9 +52,13 @@ public class Numbers extends Actor
 
     public void numLock()
     {
+        // This runs while the lock is being picked everytime the player clicks the box
         if(Greenfoot.mouseClicked(this))
         {
+            // The lock pick sound will play
             Greenfoot.playSound("Lock Pick.mp3");
+            
+            // The numbers will be enqueued and the image will change to the number
             int x = num.dequeue();
             num.enqueue(x);
             currentAns = x;
@@ -65,6 +70,7 @@ public class Numbers extends Actor
         }
     }
 
+    // This returns the current status of the lock
     public int getCurrentAns()
     {
         return currentAns;

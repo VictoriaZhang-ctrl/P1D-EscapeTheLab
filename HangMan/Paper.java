@@ -2,9 +2,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class Star here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 public class Paper extends Actor
 {
@@ -14,6 +11,7 @@ public class Paper extends Actor
      */
     public void act()
     {
+        // This will run if the player pressed the space bar while the hangman is touching the paper
         if(this.isTouching(HangMan.class))
         {
             if(Greenfoot.isKeyDown("Space"))
@@ -21,6 +19,7 @@ public class Paper extends Actor
                 World world = getWorld();
                 Stage stage = (Stage)world;
                 
+                // The stage will change to the word scramble game after the paper was pressed
                 stage.changeSpawnStatus();
                 
                 stage.scrambleWord_Game();
