@@ -1,11 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Rules here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class Rules extends Actor
 {
     /**
@@ -15,6 +10,8 @@ public class Rules extends Actor
     int showImage = 0;
     public void act()
     {
+        //When the Mouse arrow clicked the image and the stage will change to another image, also the clicking will play once the mouse clicked it.
+        //and return to beginning stage
         if(Greenfoot.mouseClicked(this))
         {
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");

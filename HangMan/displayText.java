@@ -1,11 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class displayText here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class displayText extends Actor
 {
     private String text;
@@ -15,10 +9,12 @@ public class displayText extends Actor
      */
     public displayText(String text)
     {
+        //display text in the world
         this.text = text;
     }
     public void act()
     {
+        //Make txt size and color  
         setImage(new GreenfootImage(text, 48, Color.BLACK, Color.WHITE));
     }
 }
