@@ -45,15 +45,11 @@ public class Stack<E> implements Iterable<E>
 
     class MyIterator implements Iterator<E>
     {
-        // This sets n to the first node
         private Node n = first;
         
-        // This checks to see if there are more nodes
         public boolean hasNext() {
             return n != null;
         }
-
-        // This links the first node to the next node
         public E next() {
             E item = n.item;
             n = n.next;
