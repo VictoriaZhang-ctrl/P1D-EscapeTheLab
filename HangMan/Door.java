@@ -30,6 +30,7 @@ public class Door extends Actor
                 getWorld().addObject(two, 450, 75);
                 getWorld().addObject(three, 750, 75);
                 getWorld().addObject(four, 1050, 75);
+                HangMan.gameMode();
                 spawned = true;
             }
         }
@@ -48,6 +49,7 @@ public class Door extends Actor
             Greenfoot.playSound("mixkit-gaming-lock-2848.wav");
             Greenfoot.delay(50);
             stage.increaseRoomNum();
+            HangMan.walkMode();
         }
     }
 }

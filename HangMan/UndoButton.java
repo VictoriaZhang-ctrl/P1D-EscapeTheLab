@@ -14,7 +14,7 @@ public class UndoButton extends Actor
      */
     public void act()
     {
-        if (Greenfoot.mouseClicked(this))
+        if (Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("Backspace"))
         {
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
             World world = getWorld();
