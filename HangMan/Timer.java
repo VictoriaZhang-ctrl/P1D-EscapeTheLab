@@ -33,9 +33,10 @@ public class Timer extends Actor
         count++;
     }
     
+    //Spawn the JudgementBird 10 seconds after this function is called.
     public static void addTime()
     {
-        time += 200;
+        time += 1000;
     }
     
     public static void allowSpawnBird()

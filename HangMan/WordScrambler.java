@@ -54,7 +54,6 @@ public class WordScrambler extends Actor
         Random r = new Random();
         
         String key = keys.get(r.nextInt(keys.size()));
-        
         return key;
     }
     
