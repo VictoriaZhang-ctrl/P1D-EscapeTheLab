@@ -206,7 +206,7 @@ public class Stage extends World
     public void win()
     {
         bgm.stop();
-        Greenfoot.playSound("138 Spotted! Twins.mp3");
+        Greenfoot.playSound("Winner.mp3");
         
         String totalTime = Integer.toString(Timer.count/100); 
         removeObjects(getObjects(null));
@@ -223,6 +223,7 @@ public class Stage extends World
     public void gameOver()
     {
         bgm.stop();
+        Greenfoot.playSound("Game Over.mp3");
         removeObjects(getObjects(null));
         setBackground(new GreenfootImage("HangMan_BackGround.png"));
         showText(null, 600, 75);

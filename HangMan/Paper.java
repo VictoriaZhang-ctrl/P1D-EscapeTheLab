@@ -18,6 +18,7 @@ public class Paper extends Actor
         {
             if(Greenfoot.isKeyDown("Space"))
             {
+                Greenfoot.playSound("Paper Sound.mp3");
                 World world = getWorld();
                 Stage stage = (Stage)world;
                 
