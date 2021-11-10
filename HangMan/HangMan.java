@@ -2,18 +2,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class HangMan here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 public class HangMan extends Actor
 {
+    // This includes both pictures for the Stickman, original and inverted
     GreenfootImage original = new GreenfootImage("StickMan_Scared.png");
     GreenfootImage inverted = new GreenfootImage("StickMan_flipped.png");
     
+    // This includes the walking right animation for the Stickman
     GreenfootImage right1 = new GreenfootImage("Walk_1.png");
     GreenfootImage right2 = new GreenfootImage("Walk_2.png");
     
+    // This includes the walking left animation for the Stickman
     GreenfootImage left1 = new GreenfootImage("Walk_3.png");
     GreenfootImage left2 = new GreenfootImage("Walk_4.png");
     
@@ -30,6 +30,7 @@ public class HangMan extends Actor
         }
     }
     
+    // class variables
     private int right = 0;
     private int rightImage = 0;
     
@@ -37,12 +38,16 @@ public class HangMan extends Actor
     private int leftImage = 0;
     
     private int speed = 5;
+    
+    // This method is what enables the Stickman to walk
     public void walk()
     {
+        // If the right key is down, the Stickman will walk right
         if(Greenfoot.isKeyDown("right") == true)
         {
             right++;
         }
+        // These are used for the walking right animation
         if(right == 5)
         {
             rightImage = 1;
@@ -79,10 +84,13 @@ public class HangMan extends Actor
             rightImage = 0;
         }
         
+        // If the left key is down, the Stickman will walk left
         if(Greenfoot.isKeyDown("left") == true)
         {
             left++;
         }
+        
+        // These are used for the walking left animation
         if(left == 5)
         {
             leftImage = 1;

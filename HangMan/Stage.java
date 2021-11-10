@@ -2,14 +2,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
  * Write a description of class MyWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 
 public class Stage extends World
 
 {
+    //class varaibles
     public int MAX_WordScramble = 10;
 
     public boolean gameStart = false;
@@ -24,6 +22,9 @@ public class Stage extends World
 
     public String correctAns = "";
     public String storeWord = "";
+    
+    String text = "";
+    String stringToDisplay = "";
 
     //RoomNum Regulator Variables
     public int roomNum = 0;
@@ -49,15 +50,11 @@ public class Stage extends World
     Timer timer = new Timer();
     Rules ruleButton = new Rules();
 
-    String text = "";
-
-    String stringToDisplay = "";
-
-    //All Data Structures
+    //Data Structures
     static HashMap<String, String> map = new HashMap<String, String>();
     static Stack<Character> stackOfLetters = new Stack<Character>();
 
-    //ListOfWords
+    //List of words read from a file
     ArrayList<String> myList = new ArrayList<String>();
 
     /**
@@ -72,41 +69,55 @@ public class Stage extends World
 
     public void act()
     {
+        // If the game has not started yet, the rule button will be on the screen
         if(!gameStart)
         {
             addObject(ruleButton, 1100, 550);
             gameStart();
         }
-
+           
+        // If the player is on room 1, the things in room 1 will spawn
         if(roomNum == 1)
         {
             prepare_Room1();
         }
+        
+        // If the player is on room 2, the things in room 2 will spawn
         if(roomNum == 2)
         {
             prepare_Room2();
         }
+        
+        // If the player is on room 3, the things in room 3 will spawn
         if(roomNum == 3)
         {
             prepare_Room3();
         }
+        
+        // If the player is on room 4, it is the winning screen, and the things in room 4 will spawn
         if(roomNum == 4)
         {
             win();
         }
     }
 
+    // This is what will run when the game is started
     public void gameStart()
     {
+        // If the enter key is pressed the game will start
         if(Greenfoot.isKeyDown("Enter"))
         {
+            // The background sound will play
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
-            gameStart = true;
+            
+            // The rule button will be removed and the difficulty buttons will spawn
             removeObject(ruleButton);
             setBackground(new GreenfootImage("GreyBackDrop.png"));
             addObject(new DifficultyButton(1), 300, 200);
             addObject(new DifficultyButton(2), 600, 200);
             addObject(new DifficultyButton(3), 900, 200);
+            
+            gameStart = true;
         }
     }
     
@@ -115,6 +126,7 @@ public class Stage extends World
         difficulty = setDifficulty;
     }
     
+    // Once the difficulty is selected the list of words for that difficulty will spawn
     public void difficultySelected()
     {
         //Ready Words
@@ -127,10 +139,13 @@ public class Stage extends World
             passwordRoom3 = setPassword();
         }
         spawnList = false;
+        
+        //Play BGM & Begin Game
         bgm.playLoop();
         roomNum++;
     }
 
+    // This will run when the player is in room 1
     public void prepare_Room1()
     {
         if(!roomOnePrep)
@@ -139,8 +154,10 @@ public class Stage extends World
             removeObjects(getObjects(null));
             setBackground(background);
 
+            // The timer rill run to see when the judgement bird should spawn
             timer.allowSpawnBird();
-
+            
+            // The objects will be added
             addObject(new Paper(), 700, 480);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
@@ -157,14 +174,17 @@ public class Stage extends World
         }
     }
 
+    // This will run when the player is in room 2
     public void prepare_Room2()
     {
         if(!roomTwoPrep)
         {
             removeObjects(getObjects(null));
 
+            // The timer will run to see when the judgement bird will spawn
             timer.allowSpawnBird();
 
+            // The objects will be added
             addObject(new Paper(), 510, 400);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
@@ -181,14 +201,17 @@ public class Stage extends World
         }
     }
 
+    // This will run when the player is in room 3
     public void prepare_Room3()
     {
         if(!roomThreePrep)
         {
             removeObjects(getObjects(null));
 
+            // The timer will run to see when the judgement bird will spawn
             timer.allowSpawnBird();
 
+            // The objects will be added
             addObject(new Paper(), 500, 410);
             addObject(new Paper(), 850, 560);
             addObject(new Door(), 1100, 410);
@@ -206,50 +229,66 @@ public class Stage extends World
         }
     }
 
+    // This will run when the player is in room 4, when they have won
     public void win()
     {
+        // The background music will stop playing
         bgm.stop();
+        // The winning music will play
         Greenfoot.playSound("138 Spotted! Twins.mp3");
         
+        // This will return the total amount of time it took the player to escape
         String totalTime = Integer.toString(Timer.count/100); 
         removeObjects(getObjects(null));
 
+        // The background will change to the winning screen
         setBackground(new GreenfootImage("BackGround_WinScreen.png"));
 
+        // This will tell the player how long it took them to escape
         text = "It took you " + totalTime + " seconds to escape!";
         addObject(new displayText(text), 600, 550);
         
+        // The stickman will change to a happy stickman
         getBackground().drawImage(new GreenfootImage("StickMan_Happy.png"), 550, 270);
+        // The game will stop running
         Greenfoot.stop();
     }
 
+    // This will run if the game ended, when the player lost
     public void gameOver()
     {
+        // The background music will stop
         bgm.stop();
+        // All the objects will be removed
         removeObjects(getObjects(null));
+        // The background will change to the game over background
         setBackground(new GreenfootImage("HangMan_BackGround.png"));
         showText(null, 600, 75);
 
         addObject(new HangedMan(), 600, 100);
     }
 
+    // Everytime the player goes to the next room a sound will play
     public void increaseRoomNum()
     {
         Greenfoot.playSound("mixkit-gear-metallic-lock-sound-2858.wav");
         roomNum++;
     }
     
+    // This makes a different combination for the lock every time
     public String setPassword()
     {
         String password = "";
         for(int i = 0; i<4; i++)
         {
+            // The password will always have 4 numbers ranging from 0 to 9
             String str = Integer.toString((int)(Math.random() * 9));
             password += str;
         }
         return password;
     }
 
+    // This sets the passwords for each room
     public String getPassword()
     {
         if(roomNum == 1)
@@ -268,7 +307,7 @@ public class Stage extends World
 
     //Utility
     //All Word Scramble Game-Code Below
-    public void scrambleWord_Game()
+    public void beginWordScrambleGame()
     {
         man.gameMode();
         if(spawn)
@@ -322,6 +361,7 @@ public class Stage extends World
             str += x;
         }
 
+        // This checks to see if the answer is correct or incorrect
         if(!str.equals(correctAns))
         {
             incorrect();
@@ -341,14 +381,18 @@ public class Stage extends World
         spawnCharArray(storeWord.toCharArray());
     }
 
+    // This will run if the answer is correct
     public void correct()
     {
+        // This sound will play
         Greenfoot.playSound("correct.mp3");
         man.walkMode();
+        // The objects will be removed
         removeObjects(getObjects(InputBox.class));
         removeObjects(getObjects(SubmitButton.class));
         removeObjects(getObjects(UndoButton.class));
 
+        // For each room, the lock combination will be printed to the screen
         if(roomNum == 1)
         {
             showText("The password is " + passwordRoom1, 600, 75);
@@ -359,12 +403,12 @@ public class Stage extends World
         }
         else if(roomNum == 3 && roomThreeProgress == 0)
         {
-            showText("The password is " + passwordRoom3.substring(0,2), 600, 75);
+            showText("The first part of the password is " + passwordRoom3.substring(0,2), 600, 75);
             roomThreeProgress++;
         }
         else
         {
-            showText("The password is " + passwordRoom3.substring(2,4), 600, 75);
+            showText("The second part of the password is " + passwordRoom3.substring(2,4), 600, 75);
         }
     }
 
@@ -392,11 +436,13 @@ public class Stage extends World
         stackOfLetters.push(x);
     }
 
+    // This clears the string
     public void clearString()
     {
         stringToDisplay = "";
     }
 
+    // This clears what the player currently has by popping off the letters
     public void clearStack()
     {
         while(!stackOfLetters.isEmpty())

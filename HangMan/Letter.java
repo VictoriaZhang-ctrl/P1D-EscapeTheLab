@@ -2,19 +2,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Scanner;
 /**
  * Write a description of class Letters here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 public class Letter extends Actor
 {
+    // class variables
     private char letter;
     private GreenfootImage image;
     /**
      * Act - do whatever the Letters wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-
+    
+    // This will spawn a picture of the letter
     public Letter(char letter)
     {
         this.letter = letter;
@@ -22,6 +21,7 @@ public class Letter extends Actor
         setImage(image);
     }
 
+    
     public void act()
     {
         if (Greenfoot.mouseDragged(this))
@@ -38,11 +38,13 @@ public class Letter extends Actor
             }
             else
             {
+                // Every time a letter is dragged, a paper sound will play
+                Greenfoot.playSound("Paper paper.mp3");
                 World world = getWorld();
                 Stage stage = (Stage)world;
 
-                reportLetter();
-
+                reportInput();
+                
                 stage.printStack();
 
                 stage.clearString();
@@ -50,23 +52,11 @@ public class Letter extends Actor
                 world.removeObject(this);
             }
         }
-        //Enter Letter via KeyBoard
-        if(Greenfoot.isKeyDown(Character.toString(letter)))
-        {
-            World world = getWorld();
-            Stage stage = (Stage)world;
-
-            reportLetter();
-
-            stage.printStack();
-
-            stage.clearString();
-
-            world.removeObject(this);
-        }
     }
-
-    public void reportLetter()
+    
+    // This pushes the letter on to the stackOfStrings found in Stage
+    // This stackOfStrings records the user's inputs
+    public void reportInput()
     {
         World world = getWorld();
         Stage stage = (Stage)world;

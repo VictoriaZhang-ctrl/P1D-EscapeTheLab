@@ -1,11 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Submit here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class SubmitButton extends Actor
 {
     /**
@@ -13,8 +8,9 @@ public class SubmitButton extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
-    {
-        if (Greenfoot.mouseClicked(this))
+    {   
+        //it will play the wsubmit sound and renew to a new stage by use mouse or enter key to control
+        if(Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("Enter"))
         {
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
             World world = getWorld();

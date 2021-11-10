@@ -3,8 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class InputBox here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Just the picture for the code to interact with
  */
 public class InputBox extends Actor
 {

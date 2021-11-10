@@ -1,11 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Timer here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Timer extends Actor
 {
     static int time;
@@ -18,11 +12,11 @@ public class Timer extends Actor
      */
     public void act()
     {
-        if(time > 0)
+        if(time > 0) //timer will count down
         {
             time--;
         }
-        else if(allowSpawnBird)
+        else if(allowSpawnBird) //it will reset the judgementBird begin and after timer comes off, it will release JudgementBird
         {
             Greenfoot.playSound("mixkit-horror-impact-773.wav");
             World world = getWorld();
@@ -31,7 +25,7 @@ public class Timer extends Actor
             getWorld().addObject(bird, 0, 400);
             allowSpawnBird = false;
         }
-        count++;
+        count++; 
     }
     
     //Spawn the JudgementBird 10 seconds after this function is called.
@@ -40,6 +34,7 @@ public class Timer extends Actor
         time += 1000;
     }
     
+    //Spwan the JudgementBird
     public static void allowSpawnBird()
     {
         allowSpawnBird = true;
