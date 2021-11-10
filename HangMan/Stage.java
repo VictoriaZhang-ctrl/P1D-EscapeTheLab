@@ -73,7 +73,7 @@ public class Stage extends World
         if(!gameStart)
         {
             addObject(ruleButton, 1100, 550);
-            gameStart();
+            showTitleScreen();
         }
            
         // If the player is on room 1, the things in room 1 will spawn
@@ -102,7 +102,7 @@ public class Stage extends World
     }
 
     // This is what will run when the game is started
-    public void gameStart()
+    public void showTitleScreen()
     {
         // If the enter key is pressed the game will start
         if(Greenfoot.isKeyDown("Enter"))
@@ -134,9 +134,9 @@ public class Stage extends World
         {
             fillListOfWords();
             fillHashMap();
-            passwordRoom1 = setPassword();
-            passwordRoom2 = setPassword();
-            passwordRoom3 = setPassword();
+            passwordRoom1 = setRandomizedPassword();
+            passwordRoom2 = setRandomizedPassword();
+            passwordRoom3 = setRandomizedPassword();
         }
         spawnList = false;
         
@@ -229,7 +229,10 @@ public class Stage extends World
         }
     }
 
-    // This will run when the player is in room 4, when they have won
+    // This will run when the player has passed a total of 3 rooms
+    // This signifies that the player has completed the game
+    // The total amount of time the player used is tallied and displayed.
+    // The game ends after this function is called.
     public void win()
     {
         // The background music will stop playing
@@ -254,7 +257,9 @@ public class Stage extends World
         Greenfoot.stop();
     }
 
-    // This will run if the game ended, when the player lost
+    // This method displays a series of animations
+    // This method is called when JudgementBird catches the player avatar
+    // Signifies that the player has lost.
     public void gameOver()
     {
         // The background music will stop
@@ -276,7 +281,7 @@ public class Stage extends World
     }
     
     // This makes a different combination for the lock every time
-    public String setPassword()
+    public String setRandomizedPassword()
     {
         String password = "";
         for(int i = 0; i<4; i++)
@@ -309,7 +314,11 @@ public class Stage extends World
     //All Word Scramble Game-Code Below
     public void beginWordScrambleGame()
     {
+        //disables the player's ability to walk around.
         man.gameMode();
+        
+        // if(spawn) ensures that the code within the if-loop is run only once
+        // Only one set of letters should be displayed on-screen
         if(spawn)
         {
             addObject(inputBox, 600, 150);

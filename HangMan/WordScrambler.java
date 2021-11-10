@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.*;
 
-public class WordScrambler extends Actor
+public class WordScrambler
 {
     public static String scrambled(String word)
     {
