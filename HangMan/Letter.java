@@ -38,6 +38,7 @@ public class Letter extends Actor
             }
             else
             {
+                Greenfoot.playSound("Paper paper.mp3");
                 World world = getWorld();
                 Stage stage = (Stage)world;
 
@@ -53,6 +54,8 @@ public class Letter extends Actor
         //Enter Letter via KeyBoard
         if(Greenfoot.isKeyDown(Character.toString(letter)))
         {
+            Greenfoot.playSound("Paper paper.mp3");
+            
             World world = getWorld();
             Stage stage = (Stage)world;
 

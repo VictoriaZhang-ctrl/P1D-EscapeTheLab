@@ -13,9 +13,9 @@ public class DifficultyButton extends Actor
      * Act - do whatever the DifficultyButton wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public DifficultyButton(int setDifficulty)
+    public DifficultyButton(int difficulty)
     {
-        this.setDifficulty = setDifficulty;
+        this.setDifficulty = difficulty;
         if(setDifficulty == 1)
         {
             setImage(new GreenfootImage("Easy.png"));
@@ -39,6 +39,7 @@ public class DifficultyButton extends Actor
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
             
             stage.setDifficulty(setDifficulty);
+            
             stage.difficultySelected();
         }
     }

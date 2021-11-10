@@ -15,7 +15,7 @@ public class Stage extends World
     public boolean gameStart = false;
     public boolean gameOver = false;
 
-    public int difficulty = 0;
+    public int difficulty;
 
     //Spawn Regulator Variables
     public static boolean spawn = true;
@@ -444,7 +444,7 @@ public class Stage extends World
                 //fills map {scrambled: unscrambled}
                 wordScrambler.fill(str);
             }
-            else
+            else if (difficulty == 3)
             {
                 while(str.length() < 6)
                 {
