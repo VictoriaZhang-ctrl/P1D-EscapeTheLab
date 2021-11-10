@@ -39,7 +39,7 @@ public class DifficultyButton extends Actor
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
             
             stage.setDifficulty(setDifficulty);
-            
+
             stage.difficultySelected();
         }
     }

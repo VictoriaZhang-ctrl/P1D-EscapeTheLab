@@ -15,7 +15,7 @@ public class Stage extends World
     public boolean gameStart = false;
     public boolean gameOver = false;
 
-    public int difficulty;
+    public int difficulty = 0;
 
     //Spawn Regulator Variables
     public static boolean spawn = true;
@@ -24,6 +24,9 @@ public class Stage extends World
 
     public String correctAns = "";
     public String storeWord = "";
+    
+    String text = "";
+    String stringToDisplay = "";
 
     //RoomNum Regulator Variables
     public int roomNum = 0;
@@ -49,15 +52,11 @@ public class Stage extends World
     Timer timer = new Timer();
     Rules ruleButton = new Rules();
 
-    String text = "";
-
-    String stringToDisplay = "";
-
-    //All Data Structures
+    //Data Structures
     static HashMap<String, String> map = new HashMap<String, String>();
     static Stack<Character> stackOfLetters = new Stack<Character>();
 
-    //ListOfWords
+    //List of words read from a file
     ArrayList<String> myList = new ArrayList<String>();
 
     /**
@@ -101,12 +100,14 @@ public class Stage extends World
         if(Greenfoot.isKeyDown("Enter"))
         {
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
-            gameStart = true;
+            
             removeObject(ruleButton);
             setBackground(new GreenfootImage("GreyBackDrop.png"));
             addObject(new DifficultyButton(1), 300, 200);
             addObject(new DifficultyButton(2), 600, 200);
             addObject(new DifficultyButton(3), 900, 200);
+            
+            gameStart = true;
         }
     }
     
@@ -127,6 +128,8 @@ public class Stage extends World
             passwordRoom3 = setPassword();
         }
         spawnList = false;
+        
+        //Play BGM & Begin Game
         bgm.playLoop();
         roomNum++;
     }
@@ -444,7 +447,7 @@ public class Stage extends World
                 //fills map {scrambled: unscrambled}
                 wordScrambler.fill(str);
             }
-            else if (difficulty == 3)
+            else
             {
                 while(str.length() < 6)
                 {
