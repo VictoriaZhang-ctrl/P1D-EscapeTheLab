@@ -43,7 +43,7 @@ public class Letter extends Actor
                 World world = getWorld();
                 Stage stage = (Stage)world;
 
-                reportLetter();
+                reportInput();
                 
                 stage.printStack();
 
@@ -52,27 +52,11 @@ public class Letter extends Actor
                 world.removeObject(this);
             }
         }
-        //Enter Letter via KeyBoard
-        if(Greenfoot.isKeyDown(Character.toString(letter)))
-        {
-            // Everytime a letter is pressed a paper sound will play
-            Greenfoot.playSound("Paper paper.mp3");
-            
-            World world = getWorld();
-            Stage stage = (Stage)world;
-            
-            reportLetter();
-
-            stage.printStack();
-
-            stage.clearString();
-
-            world.removeObject(this);
-        }
     }
     
-    // This pushes the letter on to the stack
-    public void reportLetter()
+    // This pushes the letter on to the stackOfStrings found in Stage
+    // This stackOfStrings records the user's inputs
+    public void reportInput()
     {
         World world = getWorld();
         Stage stage = (Stage)world;

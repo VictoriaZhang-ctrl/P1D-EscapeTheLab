@@ -307,7 +307,7 @@ public class Stage extends World
 
     //Utility
     //All Word Scramble Game-Code Below
-    public void scrambleWord_Game()
+    public void beginWordScrambleGame()
     {
         man.gameMode();
         if(spawn)
@@ -403,12 +403,12 @@ public class Stage extends World
         }
         else if(roomNum == 3 && roomThreeProgress == 0)
         {
-            showText("The password is " + passwordRoom3.substring(0,2), 600, 75);
+            showText("The first part of the password is " + passwordRoom3.substring(0,2), 600, 75);
             roomThreeProgress++;
         }
         else
         {
-            showText("The password is " + passwordRoom3.substring(2,4), 600, 75);
+            showText("The second part of the password is " + passwordRoom3.substring(2,4), 600, 75);
         }
     }
 

@@ -1,15 +1,13 @@
 #BlueJ class context
 comment0.target=WordScrambler
-comment1.params=
-comment1.target=void\ act()
-comment2.params=word
-comment2.target=java.lang.String\ scrambled(java.lang.String)
-comment3.params=shuffledWord\ position1\ position2
-comment3.target=java.lang.String\ swapCharacters(java.lang.String,\ int,\ int)
-comment4.params=word
-comment4.target=void\ fill(java.lang.String)
-comment5.params=map
-comment5.target=java.lang.String\ getRandomWord(java.util.HashMap)
-comment6.params=key\ map
-comment6.target=java.lang.String\ getValue(java.lang.String,\ java.util.HashMap)
-numComments=7
+comment1.params=word
+comment1.target=java.lang.String\ scrambled(java.lang.String)
+comment2.params=shuffledWord\ position1\ position2
+comment2.target=java.lang.String\ swapCharacters(java.lang.String,\ int,\ int)
+comment3.params=word
+comment3.target=void\ fill(java.lang.String)
+comment4.params=map
+comment4.target=java.lang.String\ getRandomWord(java.util.HashMap)
+comment5.params=key\ map
+comment5.target=java.lang.String\ getValue(java.lang.String,\ java.util.HashMap)
+numComments=6

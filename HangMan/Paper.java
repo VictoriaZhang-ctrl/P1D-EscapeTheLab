@@ -22,7 +22,7 @@ public class Paper extends Actor
                 // The stage will change to the word scramble game after the paper was pressed
                 stage.changeSpawnStatus();
                 
-                stage.scrambleWord_Game();
+                stage.beginWordScrambleGame();
                 
                 world.removeObject(this);
             }

@@ -4,11 +4,6 @@ import java.util.*;
 
 public class WordScrambler extends Actor
 {
-    public void act()
-    {
-          
-    }
-    
     public static String scrambled(String word)
     {
         String shuffledWord = word; //original
