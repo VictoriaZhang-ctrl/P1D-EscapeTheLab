@@ -24,6 +24,7 @@ public class Timer extends Actor
         }
         else if(allowSpawnBird)
         {
+            Greenfoot.playSound("mixkit-horror-impact-773.wav");
             World world = getWorld();
             Stage stage = (Stage)world;
             

@@ -16,6 +16,7 @@ public class SubmitButton extends Actor
     {
         if (Greenfoot.mouseClicked(this))
         {
+            Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
             World world = getWorld();
             Stage stage = (Stage)world;
             

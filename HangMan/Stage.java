@@ -100,6 +100,7 @@ public class Stage extends World
     {
         if(Greenfoot.isKeyDown("Enter"))
         {
+            Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
             gameStart = true;
             removeObject(ruleButton);
             setBackground(new GreenfootImage("GreyBackDrop.png"));
@@ -204,19 +205,24 @@ public class Stage extends World
 
     public void win()
     {
+        bgm.stop();
+        Greenfoot.playSound("138 Spotted! Twins.mp3");
+        
         String totalTime = Integer.toString(Timer.count/100); 
         removeObjects(getObjects(null));
 
         setBackground(new GreenfootImage("BackGround_WinScreen.png"));
 
-        text = "You took " + totalTime + " seconds to escape!";
-        addObject(new displayText(text), 600, 500);
-
+        text = "It took you " + totalTime + " seconds to escape!";
+        addObject(new displayText(text), 600, 550);
+        
+        getBackground().drawImage(new GreenfootImage("StickMan_Happy.png"), 550, 270);
         Greenfoot.stop();
     }
 
     public void gameOver()
     {
+        bgm.stop();
         removeObjects(getObjects(null));
         setBackground(new GreenfootImage("HangMan_BackGround.png"));
         showText(null, 600, 75);
@@ -226,6 +232,7 @@ public class Stage extends World
 
     public void increaseRoomNum()
     {
+        Greenfoot.playSound("mixkit-gear-metallic-lock-sound-2858.wav");
         roomNum++;
     }
 
@@ -315,6 +322,7 @@ public class Stage extends World
     public void incorrect()
     {
         //remove all Letters (A, B, C, D, etc.) and resets the Letters displayed on screen
+        Greenfoot.playSound("mixkit-wrong-electricity-buzz-955.wav");
         showText(null, 600, 75);
         removeObjects(getObjects(Letter.class));   
         spawnCharArray(storeWord.toCharArray());
@@ -322,6 +330,7 @@ public class Stage extends World
 
     public void correct()
     {
+        Greenfoot.playSound("correct.mp3");
         man.walkMode();
         removeObjects(getObjects(InputBox.class));
         removeObjects(getObjects(SubmitButton.class));

@@ -36,6 +36,8 @@ public class DifficultyButton extends Actor
             World world = getWorld();
             Stage stage = (Stage)world;
             
+            Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
+            
             stage.setDifficulty(setDifficulty);
             stage.difficultySelected();
         }
