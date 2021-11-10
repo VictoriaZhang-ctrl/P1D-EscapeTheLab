@@ -1,7 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Door here.
+ * When interacted with, it requires the player to enter a 4-digit passcode
+ * to enter the next room/complete the game.
  */
 public class Door extends Actor
 {
@@ -19,7 +20,8 @@ public class Door extends Actor
     boolean game = false;
     public void act()
     {
-        // This will run of the player pressed the space bar while the hangman is touching the door
+        // If the player interacts with the Door by pressing "space"
+        // they will be required to enter a 4-digit number code
         if(this.isTouching(HangMan.class))
         {
             if(Greenfoot.isKeyDown("Space") && spawned == false)
@@ -35,6 +37,8 @@ public class Door extends Actor
             }
         }
         Stage stage = (Stage)(getWorld());
+        
+        //gets the password for this particular room
         String password = stage.getPassword();
         
         String a = Integer.toString(one.getCurrentAns());
@@ -44,14 +48,17 @@ public class Door extends Actor
         
         String ans = ""+a+b+c+d;
         
-        // If the inputted password is equal to the right combination, this will run
+        // If the inputted password is equal to the right combination
+        // they are allowed to move onto the next room.
         if(ans.equals(password))
         {
-            // The unlock sound will play
+            //The unlock sound will play
             Greenfoot.playSound("mixkit-gaming-lock-2848.wav");
-            // The room will then change after a slight delay
+            //The room will then change after a slight delay
             Greenfoot.delay(50);
             stage.increaseRoomNum();
+            
+            //the player's avatar is allowed to move again.
             HangMan.walkMode();
         }
     }

@@ -1,15 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class JudgementBird here.
+ * A predator that chases the player.
+ * 
+ * Acts as a sort of timer so that the player must complete a room in a
+ * set amount of time.
  */
 public class JudgementBird extends Actor
 {
-    /**
-     * Act - do whatever the JudgementBird wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    int count = 0;
+    int count = 0;  //a counter for animation purposes
     public void act()
     {
         // The judgement bird will walk towards the player
@@ -22,6 +21,7 @@ public class JudgementBird extends Actor
         // Add your action code here.
     }
 
+    //moves towards the player.
     public void approachPlayer()
     {
         count++;
@@ -51,7 +51,7 @@ public class JudgementBird extends Actor
         }
     }
     
-    // This willl run if the judgement bird catches the player
+    // A set of animation that plays before the GameOver screen is shown.
     public void catchPlayer()
     {
         World world = getWorld();

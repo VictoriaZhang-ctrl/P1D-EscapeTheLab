@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=DifficultyButton
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ DifficultyButton\ here.\r\n
+comment0.text=\r\n\ Allows\ the\ Player\ to\ select\ a\ difficulty\r\n
 comment1.params=difficulty
 comment1.target=DifficultyButton(int)
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ DifficultyButton\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n

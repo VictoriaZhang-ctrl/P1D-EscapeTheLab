@@ -38,7 +38,9 @@ public class Letter extends Actor
             }
             else
             {
-                // Every time a letter is dragged, a paper sound will play
+                // Every time a letter is dragged and dropped into InputBox
+                // The string displayed to the player updates so that
+                // it matches the current status of the word.
                 Greenfoot.playSound("Paper paper.mp3");
                 World world = getWorld();
                 Stage stage = (Stage)world;
@@ -55,7 +57,7 @@ public class Letter extends Actor
     }
     
     // This pushes the letter on to the stackOfStrings found in Stage
-    // This stackOfStrings records the user's inputs
+    // The stackOfStrings records the user's inputs
     public void reportInput()
     {
         World world = getWorld();

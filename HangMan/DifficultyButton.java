@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class DifficultyButton here.
+ * Allows the Player to select a difficulty
  */
 public class DifficultyButton extends Actor
 {
@@ -37,11 +37,11 @@ public class DifficultyButton extends Actor
         {
             World world = getWorld();
             Stage stage = (Stage)world;
-            // This sound will play when the player clicks on the difficulty
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
-            // this sets the stage to the difficulty chosen by the player
+            
+            // this sets the difficulty to whatever is chosen by the player
+            // the game begins immediately afterwards.
             stage.setDifficulty(setDifficulty);
-            stage.difficultySelected();
         }
     }
 }

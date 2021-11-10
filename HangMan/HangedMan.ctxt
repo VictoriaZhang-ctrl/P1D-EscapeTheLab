@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=HangedMan
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ HangedMan\ here.\r\n
+comment0.text=\r\n\ Is\ used\ in\ an\ animation\ in\ when\ the\ players\ gets\ a\ Game\ Over.\r\n\ Does\ not\ serve\ any\ other\ function.\r\n
 comment1.params=
 comment1.target=void\ act()
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ HangedMan\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n

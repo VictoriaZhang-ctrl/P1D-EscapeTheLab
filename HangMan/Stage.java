@@ -7,41 +7,41 @@ import java.util.*;
 public class Stage extends World
 
 {
-    //class varaibles
-    public int MAX_WordScramble = 10;
-
     public boolean gameStart = false;
     public boolean gameOver = false;
 
-    public int difficulty = 0;
+    public int difficulty = 0;      //1 = easy, 2 = normal; 3 = hard
 
     //Spawn Regulator Variables
     public static boolean spawn = true;
     public static boolean spawnList = true;
     public boolean allowSpawnBird = true;
 
+    //used in WordScramble game
     public String correctAns = "";
-    public String storeWord = "";
-    
+    public String storeScrambledWord = "";
+
+    //used at the end, when the player wins, their total time used is displayed.
     String text = "";
     String stringToDisplay = "";
 
     //RoomNum Regulator Variables
-    public int roomNum = 0;
+    public int roomNum = 0;                     //Determines the player's progress
+                                                //The player must complete 3 rooms
     public int roomThreeProgress = 0;
-    public boolean roomOnePrep = false;
-    public boolean roomTwoPrep = false;
+    public boolean roomOnePrep = false;         //Ensures the objects in a room
+    public boolean roomTwoPrep = false;         //Is spawned only once
     public boolean roomThreePrep = false;
 
     //Passwords
-    public static String passwordRoom1;
-    public static String passwordRoom2;
-    public static String passwordRoom3;
+    public static String passwordRoom1;         //Passwords for each room
+    public static String passwordRoom2;         //Each is different &
+    public static String passwordRoom3;         //Randomly generated
 
     GreenfootImage background = new GreenfootImage("BackGround.png");
     GreenfootSound bgm = new GreenfootSound("dark-relaxing-ambient-10275.mp3");
 
-    //All Objects
+    //Objects
     HangMan man = new HangMan();
     UndoButton undo = new UndoButton(); 
     SubmitButton submit = new SubmitButton();
@@ -73,27 +73,27 @@ public class Stage extends World
         if(!gameStart)
         {
             addObject(ruleButton, 1100, 550);
-            gameStart();
+            showTitleScreen();
         }
-           
+
         // If the player is on room 1, the things in room 1 will spawn
         if(roomNum == 1)
         {
             prepare_Room1();
         }
-        
+
         // If the player is on room 2, the things in room 2 will spawn
         if(roomNum == 2)
         {
             prepare_Room2();
         }
-        
+
         // If the player is on room 3, the things in room 3 will spawn
         if(roomNum == 3)
         {
             prepare_Room3();
         }
-        
+
         // If the player is on room 4, it is the winning screen, and the things in room 4 will spawn
         if(roomNum == 4)
         {
@@ -102,44 +102,38 @@ public class Stage extends World
     }
 
     // This is what will run when the game is started
-    public void gameStart()
+    public void showTitleScreen()
     {
         // If the enter key is pressed the game will start
         if(Greenfoot.isKeyDown("Enter"))
         {
             // The background sound will play
             Greenfoot.playSound("mixkit-retro-arcade-casino-notification-211.wav");
-            
+
             // The rule button will be removed and the difficulty buttons will spawn
             removeObject(ruleButton);
             setBackground(new GreenfootImage("GreyBackDrop.png"));
             addObject(new DifficultyButton(1), 300, 200);
             addObject(new DifficultyButton(2), 600, 200);
             addObject(new DifficultyButton(3), 900, 200);
-            
+
             gameStart = true;
         }
     }
-    
+
+    //Once the player has selected a difficulty, the game can begin
+    //words are chosen based on their lengths
+    //passwords are generated for each room
+    //roomNum++ tells the program to move on to room 1 and begin the game.
     public void setDifficulty(int setDifficulty)
     {
         difficulty = setDifficulty;
-    }
-    
-    // Once the difficulty is selected the list of words for that difficulty will spawn
-    public void difficultySelected()
-    {
-        //Ready Words
-        if(spawnList)
-        {
-            fillListOfWords();
-            fillHashMap();
-            passwordRoom1 = setPassword();
-            passwordRoom2 = setPassword();
-            passwordRoom3 = setPassword();
-        }
-        spawnList = false;
-        
+        fillListOfWords();
+
+        passwordRoom1 = setRandomizedPassword();
+        passwordRoom2 = setRandomizedPassword();
+        passwordRoom3 = setRandomizedPassword();
+
         //Play BGM & Begin Game
         bgm.playLoop();
         roomNum++;
@@ -150,23 +144,22 @@ public class Stage extends World
     {
         if(!roomOnePrep)
         {
-            //add Objects
+            //Clear the screen and set the background.
             removeObjects(getObjects(null));
             setBackground(background);
 
-            // The timer rill run to see when the judgement bird should spawn
-            timer.allowSpawnBird();
-            
             // The objects will be added
             addObject(new Paper(), 700, 480);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
 
             addObject(man, 100, 490);
-
+            
+            //Start counting down to when the bird will spawn.
+            timer.allowSpawnBird();
             timer.addTime();
 
-            //reset modes & data structures
+            //allows the player to walk around.
             man.walkMode();
             clearStack();
 
@@ -181,19 +174,15 @@ public class Stage extends World
         {
             removeObjects(getObjects(null));
 
-            // The timer will run to see when the judgement bird will spawn
-            timer.allowSpawnBird();
-
             // The objects will be added
             addObject(new Paper(), 510, 400);
             addObject(new Door(), 1100, 410);
             addObject(timer, 0, 0);
-
             addObject(man, 100, 490);
 
+            timer.allowSpawnBird();
             timer.addTime();
 
-            //reset modes & data structures
             man.walkMode();
             clearStack();
 
@@ -208,7 +197,6 @@ public class Stage extends World
         {
             removeObjects(getObjects(null));
 
-            // The timer will run to see when the judgement bird will spawn
             timer.allowSpawnBird();
 
             // The objects will be added
@@ -229,14 +217,17 @@ public class Stage extends World
         }
     }
 
-    // This will run when the player is in room 4, when they have won
+    // This will run when the player has passed a total of 3 rooms
+    // This signifies that the player has completed the game
+    // The total amount of time the player used is tallied and displayed.
+    // The game ends after this function is called.
     public void win()
     {
         // The background music will stop playing
         bgm.stop();
         // The winning music will play
         Greenfoot.playSound("138 Spotted! Twins.mp3");
-        
+
         // This will return the total amount of time it took the player to escape
         String totalTime = Integer.toString(Timer.count/100); 
         removeObjects(getObjects(null));
@@ -247,14 +238,16 @@ public class Stage extends World
         // This will tell the player how long it took them to escape
         text = "It took you " + totalTime + " seconds to escape!";
         addObject(new displayText(text), 600, 550);
-        
+
         // The stickman will change to a happy stickman
         getBackground().drawImage(new GreenfootImage("StickMan_Happy.png"), 550, 270);
         // The game will stop running
         Greenfoot.stop();
     }
 
-    // This will run if the game ended, when the player lost
+    // This method displays a series of animations
+    // This method is called when JudgementBird catches the player avatar
+    // Signifies that the player has lost.
     public void gameOver()
     {
         // The background music will stop
@@ -274,9 +267,9 @@ public class Stage extends World
         Greenfoot.playSound("mixkit-gear-metallic-lock-sound-2858.wav");
         roomNum++;
     }
-    
+
     // This makes a different combination for the lock every time
-    public String setPassword()
+    public String setRandomizedPassword()
     {
         String password = "";
         for(int i = 0; i<4; i++)
@@ -288,7 +281,7 @@ public class Stage extends World
         return password;
     }
 
-    // This sets the passwords for each room
+    // This method returns the randomized passwords for each room.
     public String getPassword()
     {
         if(roomNum == 1)
@@ -309,30 +302,35 @@ public class Stage extends World
     //All Word Scramble Game-Code Below
     public void beginWordScrambleGame()
     {
+        //disables the player's ability to walk around.
         man.gameMode();
+
+        // if(spawn) ensures that the code within the if-loop is run only once
+        // Only one set of letters should be displayed on-screen
         if(spawn)
         {
             addObject(inputBox, 600, 150);
             addObject(undo, 1000, 200);
             addObject(submit, 1000, 150);
 
-            String str = wordScrambler.getRandomWord(map);
-            String ans = wordScrambler.getValue(str, map);
-            correctAns = ans;
-            storeWord = str;
+            String unscrambledWord = getRandomWordFromFile(difficulty);
+            String scrambledWord = wordScrambler.scrambleWord(unscrambledWord);
+            correctAns = unscrambledWord;
+            storeScrambledWord = scrambledWord;
 
-            spawnCharArray(str.toCharArray());
+            displayScrambledLetters(scrambledWord.toCharArray());
             spawn = false;
         }
     }
 
-    //stackOfLetters functions
+    //Removes the last letter inputted from the stack
+    //and gives the letter back to the player.
     public void undo()
     {
         if(!stackOfLetters.isEmpty())
         {
             char x = stackOfLetters.pop();
-            spawnLetter(x, 600, 300);
+            addObject(new Letter(x), 600, 300);
             printStack();
             clearString();
         }
@@ -352,6 +350,9 @@ public class Stage extends World
         {
             list.add(stackOfLetters.pop());
         }
+        //Reverse the ArrayList because of the way a Stack is structured
+        //Last-In, First-Out, so if the ArrayList is not reverse, the word
+        //would come out backwards.
         Collections.reverse(list);
 
         //form a String with the characters in the stack.
@@ -372,27 +373,34 @@ public class Stage extends World
         }
     }
 
+    // This method will be called if the player's input does not match the answer.
     public void incorrect()
     {
-        //remove all Letters (A, B, C, D, etc.) and resets the Letters displayed on screen
         Greenfoot.playSound("mixkit-wrong-electricity-buzz-955.wav");
         showText(null, 600, 75);
-        removeObjects(getObjects(Letter.class));   
-        spawnCharArray(storeWord.toCharArray());
+        
+        //clear the screen of unused Letters
+        removeObjects(getObjects(Letter.class)); 
+        
+        //all  Letters needed to complete the puzzle is given back to the
+        //player for them to try again.
+        //Basically restarts the WordScramble game.
+        displayScrambledLetters(storeScrambledWord.toCharArray());
     }
 
-    // This will run if the answer is correct
+    // This method will be called if the answer is correct
     public void correct()
     {
         // This sound will play
         Greenfoot.playSound("correct.mp3");
         man.walkMode();
-        // The objects will be removed
+        
+        // The WordScramble game is over, remove unuseful objects.
         removeObjects(getObjects(InputBox.class));
         removeObjects(getObjects(SubmitButton.class));
         removeObjects(getObjects(UndoButton.class));
 
-        // For each room, the lock combination will be printed to the screen
+        // The corresponding password will be given to players.
         if(roomNum == 1)
         {
             showText("The password is " + passwordRoom1, 600, 75);
@@ -412,12 +420,10 @@ public class Stage extends World
         }
     }
 
-    //Utility Functions
-    public static void changeSpawnStatus()
-    {
-        spawn = true;
-    }
-
+    // This function displays all letters present in stackOfLetters during
+    // a WordScramble game.
+    // This method allows players to see what sequence of letters they've
+    // already spelled.
     public void printStack()
     {
         if (stackOfLetters.isEmpty())
@@ -436,74 +442,42 @@ public class Stage extends World
         stackOfLetters.push(x);
     }
 
-    // This clears the string
-    public void clearString()
+    //gets a random word of an appropriate length from the file.
+    //the appropriate length is based on the difficulty.
+    //Easy = 3-4 letters; Normal = 4-5 letters; Hard = 6+ letters
+    public String getRandomWordFromFile(int difficulty)
     {
-        stringToDisplay = "";
-    }
+        int appropriateSize = difficulty + 2;
 
-    // This clears what the player currently has by popping off the letters
-    public void clearStack()
-    {
-        while(!stackOfLetters.isEmpty())
+        int index = (int)(Math.random() * myList.size());
+        String str = myList.get(index);
+
+        //While the string selected is not an appropriate length
+        //reselect the string.
+        if(difficulty!=3)   //Easy and Normal uses this code
         {
-            stackOfLetters.pop();
-        }
-    }
-
-    public static HashMap getHashMap()
-    {
-        return map;
-    }
-
-    public static Stack getStack()
-    {
-        return stackOfLetters;
-    }
-
-    //set up HashMap of scrambled | unscrambled words from URL
-    public void fillHashMap()
-    {
-        for(int i = 0; i<20; i++)
-        {
-            //randomly chooses a word from a file and puts it into the map
-            int index = (int)(Math.random() * myList.size());
-            String str = myList.get(index);
-
-            if(difficulty == 1)
+            while(str.length() < appropriateSize || str.length() > appropriateSize + 1)
             {
-                while(str.length() > 4 || str.length() < 3)
-                {
-                    index = (int)(Math.random() * myList.size());
-                    str = myList.get(index);
-                }
-                //fills map {scrambled: unscrambled}
-                wordScrambler.fill(str);
-            }
-            else if(difficulty == 2)
-            {
-                while(str.length() > 5 || str.length() < 4)
-                {
-                    index = (int)(Math.random() * myList.size());
-                    str = myList.get(index);
-                }
-                //fills map {scrambled: unscrambled}
-                wordScrambler.fill(str);
-            }
-            else
-            {
-                while(str.length() < 6)
-                {
-                    index = (int)(Math.random() * myList.size());
-                    str = myList.get(index);
-                }
-                wordScrambler.fill(str);
+                index = (int)(Math.random() * myList.size());
+                str = myList.get(index);
             }
         }
+        else    //Hard uses this code
+        {
+            while(str.length() < appropriateSize + 1)
+            {
+                index = (int)(Math.random() * myList.size());
+                str = myList.get(index);
+            }
+        }
+
+        return str;
     }
-    
-    //spawn letterCards functions
-    public void spawnCharArray(char[] arr)
+
+    // Spawns the individual letters in a ScrambledWord string
+    // This allows the player to see and interact with the objects
+    // needed to complete the WordScramble game.
+    public void displayScrambledLetters(char[] arr)
     {
         int size = arr.length;
 
@@ -513,16 +487,42 @@ public class Stage extends World
 
         for(int i = 0; i<size; i++)
         {
-            spawnLetter(arr[i], 80+x*i, y);
+            addObject(new Letter(arr[i]), 80+x*i, y);
         }
     }
     
-    //spawn individual letters
-    public void spawnLetter(char letter, int x, int y)
+    // Utility Functions
+    // This method is called to allow objects needed in a WordScramble game
+    // to be created & displayed on-screen. Without this method, the objects
+    // would be spawned multiple times.
+    public static void changeSpawnStatus()
     {
-        addObject(new Letter(letter), x, y);
+        spawn = true;
     }
     
+    // This clears the String that is displayed when player inputs a letter
+    // during a WordScramble game.
+    public void clearString()
+    {
+        stringToDisplay = "";
+    }
+
+    // This removes all elements in the stackOfLetters.
+    // This method is called so that the next time a WordScramble game is played
+    // no elements is in the stack to interfere with the player's inputs.
+    public void clearStack()
+    {
+        while(!stackOfLetters.isEmpty())
+        {
+            stackOfLetters.pop();
+        }
+    }
+
+    public static Stack getStack()
+    {
+        return stackOfLetters;
+    }
+
     public void fillListOfWords()
     {
         try

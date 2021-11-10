@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HangMan here.
+ * The player's avatar.
  */
 public class HangMan extends Actor
 {
@@ -133,6 +133,7 @@ public class HangMan extends Actor
         }
     }
     
+    //Disables and enables the player's ability to move around.
     public static void walkMode()
     {
         inGame = false;
