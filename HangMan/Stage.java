@@ -74,8 +74,8 @@ public class Stage extends World
     {
         if(!gameStart)
         {
-            gameStart();
             addObject(ruleButton, 1100, 550);
+            gameStart();
         }
 
         if(roomNum == 1)
@@ -101,6 +101,8 @@ public class Stage extends World
         if(Greenfoot.isKeyDown("Enter"))
         {
             gameStart = true;
+            removeObject(ruleButton);
+            setBackground(new GreenfootImage("GreyBackDrop.png"));
             addObject(new DifficultyButton(1), 300, 200);
             addObject(new DifficultyButton(2), 600, 200);
             addObject(new DifficultyButton(3), 900, 200);
