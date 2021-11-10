@@ -282,7 +282,6 @@ public class Stage extends World
             correctAns = ans;
             storeWord = str;
 
-            System.out.println(ans);
             spawnCharArray(str.toCharArray());
             spawn = false;
         }
